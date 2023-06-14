@@ -42,7 +42,7 @@ class Choosetype extends GetView {
                   width: MediaQuery.of(context).size.width,
                   child: Center(
                       child: Text(
-                    'Next',
+                    'Next'.tr,
                     style: TextStyle(color: CustomColors.greyColor),
                   ))),
             ),

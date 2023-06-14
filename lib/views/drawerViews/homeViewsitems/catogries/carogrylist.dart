@@ -20,7 +20,7 @@ class catogrylist extends StatelessWidget {
       mainAxisSpacing: 10,
       crossAxisSpacing: 10,
       children: [
-        _buildServiceCategory('Home', "assets/images/logo.png"),
+        _buildServiceCategory('Home'.tr, "assets/images/logo.png"),
         _buildServiceCategory('Plumbing', "assets/images/logo.png"),
         _buildServiceCategory('Plumbing', "assets/images/logo.png"),
         _buildServiceCategory('Carpentry', "assets/images/logo.png"),

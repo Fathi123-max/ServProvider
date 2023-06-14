@@ -83,7 +83,7 @@ class AccountSettings extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Phone',
+                          'Phone'.tr,
                         ),
                         Text(
                           box.read("phone").toString(),

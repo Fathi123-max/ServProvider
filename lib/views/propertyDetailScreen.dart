@@ -176,9 +176,24 @@ class PropertyDetail extends StatelessWidget {
                   ),
                 ),
                 Padding(
+                  padding: const EdgeInsets.only(left: 15, top: 5, right: 15),
+                  child: Text(
+                    'address',
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 15, top: 5, right: 15),
+                  child: Text(
+                    data.area,
+                    textAlign: TextAlign.justify,
+                    style: TextStyle(color: Colors.black54),
+                  ),
+                ),
+                Padding(
                   padding: const EdgeInsets.only(left: 15, top: 10, right: 15),
                   child: Text(
-                    'Listing Agent',
+                    'Service Provider'.tr,
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       color: CustomColors.orangeColor,

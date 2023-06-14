@@ -79,7 +79,7 @@ class _EnterInfoState extends State<EnterInfo> {
                       borderRadius: BorderRadius.circular(10.0),
                       borderSide: BorderSide(color: CustomColors.orangeColor),
                     ),
-                    labelText: 'Name',
+                    labelText: 'Name'.tr,
                     labelStyle: TextStyle(color: Colors.grey),
                     prefixIcon: Icon(
                       Icons.email_outlined,
@@ -118,7 +118,7 @@ class _EnterInfoState extends State<EnterInfo> {
                       borderRadius: BorderRadius.circular(10.0),
                       borderSide: BorderSide(color: CustomColors.orangeColor),
                     ),
-                    labelText: 'Phone',
+                    labelText: 'Phone'.tr,
                     labelStyle: TextStyle(color: Colors.grey),
                     prefixIcon: Icon(
                       Icons.email_outlined,
@@ -137,7 +137,7 @@ class _EnterInfoState extends State<EnterInfo> {
                 child: InkWell(
                   onTap: _isButtonEnabled
                       ? () {
-                          box.write('name', _nameController.text);
+                          box.write('Name'.tr, _nameController.text);
                           box.write('phone', _phoneController.text);
                           Get.offAll(() => NavDrawerScreen());
                         }
@@ -154,7 +154,7 @@ class _EnterInfoState extends State<EnterInfo> {
                     width: MediaQuery.of(context).size.width,
                     child: Center(
                       child: Text(
-                        'Next',
+                        'Next'.tr,
                         style: TextStyle(color: CustomColors.greyColor),
                       ),
                     ),

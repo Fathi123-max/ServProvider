@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:haider/utills/localzation.dart';
 import 'package:haider/views/choosescreen.dart';
 import 'package:haider/views/drawerScreen.dart';
 
@@ -38,6 +39,9 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
+      translations: Languages(),
+      locale: Get.deviceLocale,
+      fallbackLocale: const Locale('ar', 'EG'),
       onInit: () => CurrentUserInfoController(),
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',

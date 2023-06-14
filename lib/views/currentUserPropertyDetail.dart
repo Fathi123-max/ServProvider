@@ -153,7 +153,7 @@ class CurrentUserPropertyDetail extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(left: 15, top: 5, right: 15),
                 child: Text(
-                  'Description',
+                  'Description'.tr,
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
               ),

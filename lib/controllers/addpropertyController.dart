@@ -10,7 +10,7 @@ class AddPropertyController extends GetxController {
   var showLoadingBar = false.obs;
   var selectedCity = 'dammita'.obs;
   // var citieslist = <CityModel>[CityModel("cairo")].obs;
-  var citieslist2 = ["cairo", 'dammita', "Farscore"].obs;
+  var citieslist2 = ["cairo", 'Dammita', "Farscore"].obs;
 
   var values = <String>[
     'Home',
@@ -25,7 +25,7 @@ class AddPropertyController extends GetxController {
     'Carpentry',
     'Gardening'
   ].obs;
-  var selectedValue = 'Home'.obs;
+  var selectedValue = 'Home'.tr.obs;
   var selectedColor = CustomColors.orangeColor.obs;
   var unSelectedColor = CustomColors.greyColor.obs;
   var images = <Asset>[].obs;

@@ -43,9 +43,9 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
         controller: _tabController,
         backgroundColor: CustomColors.orangeColor,
         items: [
-          TabItem(icon: Icons.home, title: 'Home'),
-          TabItem(icon: Icons.design_services_sharp, title: 'Services'),
-          TabItem(icon: Icons.add, title: 'Add Service'),
+          TabItem(icon: Icons.home, title: 'Home'.tr),
+          TabItem(icon: Icons.design_services_sharp, title: 'Services'.tr),
+          TabItem(icon: Icons.add, title: 'Add Service'.tr),
           TabItem(icon: Icons.people, title: 'My Services'),
         ],
         onTap: (int i) {

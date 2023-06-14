@@ -204,9 +204,10 @@ class FirestoreService {
           doc['price'],
           doc['images'],
         );
-        // if (doc['currentUserId'] == controller.currentUserId.value) {
-        propertyList.add(propertyModel);
-        // }
+        if (doc['bathrooms'] == box.read("name") &&
+            doc['bedrooms'] == box.read("phone")) {
+          propertyList.add(propertyModel);
+        }
       });
     });
     return propertyList;

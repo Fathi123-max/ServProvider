@@ -7,7 +7,7 @@ import '../views/drawerViews/homeViewsitems/catogries/carogrylist.dart';
 
 class PageViewController extends GetxController {
   var activityList = [
-    'Home',
+    'Home'.tr,
     // 'catogries',
     'Leasing',
     // 'Sell',

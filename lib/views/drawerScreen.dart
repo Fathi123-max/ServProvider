@@ -6,7 +6,6 @@ import 'package:haider/controllers/pageViewController.dart';
 import 'package:haider/utills/customColors.dart';
 
 import 'choosescreen.dart';
-import 'getdata.dart';
 
 class NavDrawerScreen extends StatelessWidget {
   // final AuthController authController = Get.find();
@@ -79,7 +78,7 @@ class NavDrawerScreen extends StatelessWidget {
                         color: Colors.white,
                       ),
                       title: Text(
-                        'Log Out',
+                        'Log Out'.tr,
                         style: TextStyle(
                             fontWeight: FontWeight.bold, color: Colors.white),
                       ),
@@ -108,8 +107,8 @@ class NavDrawerScreen extends StatelessWidget {
           title: Obx(() {
             return Text(
               draweController.selectedDrawerIndex.value == 2
-                  ? 'Account Setting'
-                  : 'Services',
+                  ? 'Account Setting'.tr
+                  : 'Services'.tr,
               style: TextStyle(
                   fontWeight: FontWeight.bold,
                   color: CustomColors.greyColor,
@@ -119,8 +118,8 @@ class NavDrawerScreen extends StatelessWidget {
           actions: [
             IconButton(
                 onPressed: () {
-                  Get.to(() => ExampleScreen());
-
+                  // Get.to(() => ExampleScreen());
+                  Get.updateLocale(const Locale('ar', 'EG'));
                   // Get.changeTheme(Get.isDarkMode
                   //     ? ThemeData.light(useMaterial3: true)
                   //     : ThemeData.dark(

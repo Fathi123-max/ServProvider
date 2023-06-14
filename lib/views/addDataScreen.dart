@@ -36,7 +36,7 @@ class AddDataScreen extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text(
-                'Add Service',
+                'Add Service'.tr,
                 style: TextStyle(
                     fontWeight: FontWeight.bold,
                     color: CustomColors.orangeColor,
@@ -47,14 +47,14 @@ class AddDataScreen extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Text(
-              'Enter Service details to listed on Services',
+              'Enter Service details to listed on Services'.tr,
               textAlign: TextAlign.center,
             ),
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Text(
-              'Service Name',
+              'Service Name'.tr,
               style: TextStyle(
                   fontSize: 18,
                   color: CustomColors.greyColor,
@@ -107,7 +107,7 @@ class AddDataScreen extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Text(
-              'Type of Service',
+              'Type of Service'.tr,
               style: TextStyle(
                   fontSize: 18,
                   color: CustomColors.greyColor,
@@ -157,7 +157,7 @@ class AddDataScreen extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Text(
-              'Select City',
+              'Select City'.tr,
               style: TextStyle(
                   fontSize: 18,
                   color: CustomColors.greyColor,
@@ -207,7 +207,7 @@ class AddDataScreen extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Text(
-              'Select Area',
+              'Select Area'.tr,
               style: TextStyle(
                   fontSize: 18,
                   color: CustomColors.greyColor,
@@ -260,7 +260,7 @@ class AddDataScreen extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Text(
-              'Description',
+              'Description'.tr,
               style: TextStyle(
                   fontSize: 18,
                   color: CustomColors.greyColor,
@@ -430,8 +430,8 @@ class AddDataScreen extends StatelessWidget {
       barrierDismissible: true, // user must tap button!
       builder: (BuildContext context) {
         return AlertDialog(
-            title: const Text(
-              'Select City',
+            title: Text(
+              'Select City'.tr,
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
             content: SingleChildScrollView(

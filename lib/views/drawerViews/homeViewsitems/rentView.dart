@@ -361,7 +361,7 @@ class RentView extends StatelessWidget {
 //       builder: (controller) => Container(
 //         height: 180,
 //         child: ListView(scrollDirection: Axis.horizontal, children: [
-//           cathome('Home', "assets/images/logo.png"),
+//           cathome( 'Home'.tr, "assets/images/logo.png"),
 //           cathome('Plumbing', "assets/images/logo.png"),
 //           cathome('Cleaning', "assets/images/logo.png"),
 //           cathome('Gardening', "assets/images/logo.png"),
