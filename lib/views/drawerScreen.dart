@@ -1,16 +1,18 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:haider/controllers/authController.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:haider/controllers/draweController.dart';
 import 'package:haider/controllers/pageViewController.dart';
 import 'package:haider/utills/customColors.dart';
 
+import 'choosescreen.dart';
+import 'getdata.dart';
+
 class NavDrawerScreen extends StatelessWidget {
-  final AuthController authController = Get.find();
+  // final AuthController authController = Get.find();
   final DraweController draweController = Get.put(DraweController());
   final PageViewController pageViewController = Get.put(PageViewController());
-
+  final box = GetStorage();
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -82,11 +84,14 @@ class NavDrawerScreen extends StatelessWidget {
                             fontWeight: FontWeight.bold, color: Colors.white),
                       ),
                       onTap: () async {
-                        await FirebaseAuth.instance.signOut();
-                        authController.currentUser(false);
-                        authController.update();
-                        pageViewController.pageViewIndex.value = 0;
-                        Get.back();
+                        // await FirebaseAuth.instance.signOut();
+                        // authController.currentUser(false);
+                        // authController.update();
+                        // pageViewController.pageViewIndex.value = 0;
+                        box.remove('name');
+                        box.remove('phone');
+
+                        Get.offAll(() => EnterInfo());
                       },
                     ),
                   ),
@@ -114,11 +119,13 @@ class NavDrawerScreen extends StatelessWidget {
           actions: [
             IconButton(
                 onPressed: () {
-                  Get.changeTheme(Get.isDarkMode
-                      ? ThemeData.light(useMaterial3: true)
-                      : ThemeData.dark(
-                          useMaterial3: true,
-                        ));
+                  Get.to(() => ExampleScreen());
+
+                  // Get.changeTheme(Get.isDarkMode
+                  //     ? ThemeData.light(useMaterial3: true)
+                  //     : ThemeData.dark(
+                  //         useMaterial3: true,
+                  //       ));
                 },
                 icon: Icon(Icons.dark_mode)),
           ],

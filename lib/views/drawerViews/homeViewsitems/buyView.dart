@@ -112,7 +112,7 @@ class BuyView extends StatelessWidget {
                                               getSellPropertyController
                                                   .allBuyList[index]
                                                   .currentUserId;
-                                          userInfoController.getUserInfo();
+                                          // userInfoController.getUserInfo();
                                           Get.to(() => PropertyDetail(
                                               data: getSellPropertyController
                                                   .allBuyList[index]));

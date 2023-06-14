@@ -196,21 +196,26 @@ class PropertyDetail extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(
-                                '${controller.userInfo.value.firstName[0].toUpperCase()}${controller.userInfo.value.firstName.substring(1).toLowerCase()} ${controller.userInfo.value.lastName[0].toUpperCase()}${controller.userInfo.value.lastName.substring(1).toLowerCase()}',
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.black54,
-                                ),
+                              Row(
+                                children: [
+                                  Text(
+                                    data.bathrooms,
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.black54,
+                                    ),
+                                  ),
+                                ],
                               ),
-                              Text(controller.userInfo.value.phoneNumber),
+                              Text(data.bedrooms),
                             ],
                           ),
                           IconButton(
                             onPressed: () {
                               FlutterPhoneDirectCaller.callNumber(
-                                  controller.userInfo.value.phoneNumber);
+                                  data.bedrooms);
                             },
                             icon: Icon(Icons.phone),
                           ),

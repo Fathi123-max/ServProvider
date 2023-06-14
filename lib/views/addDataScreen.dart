@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:haider/controllers/addpropertyController.dart';
 import 'package:haider/controllers/currentUserInfoController.dart';
 import 'package:haider/controllers/getSellAndBuyPropertController.dart';
@@ -12,7 +13,7 @@ import 'drawerScreen.dart';
 
 class AddDataScreen extends StatelessWidget {
   final String value;
-
+  final box = GetStorage();
   AddDataScreen({required this.value});
 
   final AddPropertyController controller = Get.put(AddPropertyController());
@@ -303,6 +304,7 @@ class AddDataScreen extends StatelessWidget {
               },
               onSaved: (value) {
                 controller.propertyModel.descr = value.toString();
+
                 //authController.userModel.userEmail = value.toString();
               },
             ),
@@ -391,7 +393,7 @@ class AddDataScreen extends StatelessWidget {
                                   .getRentOutProprtyOfCurrentUser();
 
                               sellPropertyController.getAllBuyingProperty();
-                              currentUserInfoController.getUserInfo();
+                              // currentUserInfoController.getUserInfo();
                               controller.areaEditTextController.clear();
                               controller.addressEditTextController.clear();
                               controller.sizeEditTextController.clear();

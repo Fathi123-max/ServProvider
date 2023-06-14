@@ -72,7 +72,7 @@ class RentView extends StatelessWidget {
                                                 rentAndRentOutController
                                                     .allRentList[index]
                                                     .currentUserId;
-                                            userInfoController.getUserInfo();
+                                            // userInfoController.getUserInfo();
                                             Get.to(() => PropertyDetail(
                                                 data: rentAndRentOutController
                                                     .allRentList[index]));

@@ -1,16 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:haider/controllers/currentUserInfoController.dart';
 import 'package:haider/utills/customColors.dart';
+
+import '../../choosescreen.dart';
 
 class AccountSettings extends StatelessWidget {
   final CurrentUserInfoController currentUserInfoController =
       Get.put(CurrentUserInfoController());
+
+  final box = GetStorage();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          Get.to(() => EnterInfo());
+        },
         heroTag: "hellofrom 2dfdsjhfj",
         backgroundColor: CustomColors.orangeColor,
         child: Icon(Icons.edit_outlined),
@@ -50,7 +57,7 @@ class AccountSettings extends StatelessWidget {
                           'Name',
                         ),
                         Text(
-                          '${currentUserInfoController.currentUserInfo.value.firstName[0].toUpperCase()}${currentUserInfoController.currentUserInfo.value.firstName.substring(1).toLowerCase()} ${currentUserInfoController.currentUserInfo.value.lastName[0].toUpperCase()}${currentUserInfoController.currentUserInfo.value.lastName.substring(1).toLowerCase()}  ',
+                          box.read("name").toString(),
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             color: Colors.black54,
@@ -79,7 +86,7 @@ class AccountSettings extends StatelessWidget {
                           'Phone',
                         ),
                         Text(
-                          '${currentUserInfoController.currentUserInfo.value.phoneNumber}',
+                          box.read("phone").toString(),
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             color: Colors.black54,

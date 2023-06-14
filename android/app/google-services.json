@@ -159,6 +159,50 @@
       },
       "oauth_client": [
         {
+          "client_id": "556979629799-9heu9cci25o3jvnlqsjj1340qmgumnv2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.haider",
+            "certificate_hash": "7c203ed98f7c49d030c57b5a63b226ef61c544f6"
+          }
+        },
+        {
+          "client_id": "556979629799-n48hei7v29t4ehgugmn9r7r6lr03vulf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCNn23DwVXkHjS1Q9-I9UEGK-7FUXDvuHE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "556979629799-htl3pe2fsbev036utpl4d8nin341n5l8.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "556979629799-25sihe3fheon0nta384brqk19u6gelft.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.fireui"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:556979629799:android:6accde8b19473c93b87c42",
+        "android_client_info": {
+          "package_name": "com.localhost.service_delivery_app"
+        }
+      },
+      "oauth_client": [
+        {
           "client_id": "556979629799-n48hei7v29t4ehgugmn9r7r6lr03vulf.apps.googleusercontent.com",
           "client_type": 3
         }

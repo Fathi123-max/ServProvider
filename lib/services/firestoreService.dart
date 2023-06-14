@@ -1,19 +1,19 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:get/get.dart';
-import 'package:haider/controllers/authController.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:haider/models/cityModel.dart';
 import 'package:haider/models/propertyModel.dart';
 import 'package:haider/models/userModel.dart';
 import 'package:haider/utills/customToast.dart';
 
 class FirestoreService {
-  var currentUser = FirebaseAuth.instance.currentUser;
-  final AuthController controller = Get.find();
+  // var currentUser = FirebaseAuth.instance.currentUser;
+  // final AuthController controller = Get.find();
   CollectionReference users = FirebaseFirestore.instance.collection('users');
   CollectionReference property =
       FirebaseFirestore.instance.collection('property');
+
+  final box = GetStorage();
 
 //Adding user Data to FireStore Database
   Future<void> addUserToFireStore(UserModel userModel) async {
@@ -35,7 +35,7 @@ class FirestoreService {
       PropertyModel propertyModel, List images, String typeFor) async {
     List imageUrls = [];
     propertyModel.images = images;
-    propertyModel.currentUserId = currentUser!.uid;
+    propertyModel.currentUserId = "currentUser!.uid";
 
     propertyModel.propertyFor = typeFor;
     for (int i = 0; i < propertyModel.images.length; i++) {
@@ -69,9 +69,9 @@ class FirestoreService {
       'city': propertyModel.city.toString(),
       'area': propertyModel.area.toString(),
       'size': "propertyModel.size.toString()",
-      'bedrooms': "propertyModel.bedrooms.toString()",
+      'bedrooms': box.read('phone'),
       'address': propertyModel.address.toString(),
-      'bathrooms': "propertyModel.bathrooms.toString()",
+      'bathrooms': box.read('name'),
       'kitchen': "propertyModel.kitchen.toString()",
       'des': propertyModel.descr.toString(),
       'price': "propertyModel.price.toString()",
@@ -134,10 +134,10 @@ class FirestoreService {
           doc['price'],
           doc['images'],
         );
-        if (doc['currentUserId'] == controller.currentUserId.value &&
-            doc['propertyFor'] == 'sale') {
-          propertyList.add(propertyModel);
-        }
+        // if (doc['currentUserId'] == controller.currentUserId.value &&
+        //     doc['propertyFor'] == 'sale') {
+        propertyList.add(propertyModel);
+        // }
       });
     });
     return propertyList;
@@ -204,9 +204,9 @@ class FirestoreService {
           doc['price'],
           doc['images'],
         );
-        if (doc['currentUserId'] == controller.currentUserId.value) {
-          propertyList.add(propertyModel);
-        }
+        // if (doc['currentUserId'] == controller.currentUserId.value) {
+        propertyList.add(propertyModel);
+        // }
       });
     });
     return propertyList;
@@ -279,29 +279,29 @@ class FirestoreService {
     return propertyListbycat;
   }
 
-  Future<UserModel> getUserInfo(String id) async {
-    //  dynamic currentUserId = FirebaseAuth.instance.currentUser!.uid;
-    //CustomToast.showToast(id);
-    UserModel newUserModel = UserModel();
-    await FirebaseFirestore.instance
-        .collection('users')
-        .get()
-        .then((QuerySnapshot querySnapshot) {
-      querySnapshot.docs.forEach((doc) {
-        UserModel userModel = UserModel();
-        if (doc['userId'] == id) {
-          userModel.currentUserId = doc['userId'];
-          userModel.firstName = doc['firstName'];
-          print('user name is ${userModel.firstName}');
-          userModel.lastName = doc['LastName'];
-          userModel.phoneNumber = doc['phoneNo'];
+  // Future<UserModel> getUserInfo(String id) async {
+  //   //  dynamic currentUserId = FirebaseAuth.instance.currentUser!.uid;
+  //   //CustomToast.showToast(id);
+  //   UserModel newUserModel = UserModel();
+  //   await FirebaseFirestore.instance
+  //       .collection('users')
+  //       .get()
+  //       .then((QuerySnapshot querySnapshot) {
+  //     querySnapshot.docs.forEach((doc) {
+  //       UserModel userModel = UserModel();
+  //       if (doc['userId'] == id) {
+  //         userModel.currentUserId = doc['userId'];
+  //         userModel.firstName = doc['firstName'];
+  //         print('user name is ${userModel.firstName}');
+  //         userModel.lastName = doc['LastName'];
+  //         userModel.phoneNumber = doc['phoneNo'];
 
-          newUserModel = userModel;
-        }
-      });
-    });
-    return newUserModel;
-  }
+  //         newUserModel = userModel;
+  //       }
+  //     });
+  //   });
+  //   return newUserModel;
+  // }
 
   Future<String> updateProperty(String docID, String updatedValue) async {
     CollectionReference collectionReference =
