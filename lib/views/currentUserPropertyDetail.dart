@@ -7,6 +7,7 @@ import 'package:haider/controllers/rentAndRentOutController.dart';
 import 'package:haider/models/propertyModel.dart';
 import 'package:haider/utills/customColors.dart';
 import 'package:haider/utills/customToast.dart';
+import 'package:photo_view/photo_view.dart';
 
 class CurrentUserPropertyDetail extends StatelessWidget {
   final PropertyModel data;
@@ -41,28 +42,42 @@ class CurrentUserPropertyDetail extends StatelessWidget {
                     },
                     scrollDirection: Axis.horizontal,
                     children: data.images.map((e) {
-                      return CachedNetworkImage(
-                        imageUrl: e,
-                        imageBuilder: (context, imageProvider) => Card(
-                          elevation: 3,
-                          shape: RoundedRectangleBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10))),
-                          clipBehavior: Clip.antiAlias,
-                          child: Container(
-                            width: MediaQuery.of(context).size.width,
-                            decoration: BoxDecoration(
-                              image: DecorationImage(
-                                image: imageProvider,
-                                fit: BoxFit.cover,
+                      return Hero(
+                        tag: e,
+                        child: GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => Scaffold(
+                                  backgroundColor: Colors.black,
+                                  body: PhotoView(
+                                    imageProvider: NetworkImage(e),
+                                    backgroundDecoration:
+                                        BoxDecoration(color: Colors.black),
+                                    loadingBuilder: (context, event) => Center(
+                                        child: CircularProgressIndicator()),
+                                  ),
+                                ),
+                              ),
+                            );
+                          },
+                          child: CachedNetworkImage(
+                            imageUrl: e,
+                            imageBuilder: (context, imageProvider) => Container(
+                              decoration: BoxDecoration(
+                                image: DecorationImage(
+                                  image: imageProvider,
+                                  fit: BoxFit.cover,
+                                ),
                               ),
                             ),
+                            placeholder: (context, url) =>
+                                Center(child: CircularProgressIndicator()),
+                            errorWidget: (context, url, error) =>
+                                Center(child: Icon(Icons.error)),
                           ),
                         ),
-                        placeholder: (context, url) =>
-                            Center(child: CircularProgressIndicator()),
-                        errorWidget: (context, url, error) =>
-                            Center(child: Icon(Icons.error)),
                       );
                     }).toList()),
               ),

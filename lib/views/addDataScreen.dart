@@ -8,7 +8,7 @@ import 'package:haider/utills/customColors.dart';
 import 'package:haider/utills/customToast.dart';
 import 'package:multi_image_picker/multi_image_picker.dart';
 
-import 'drawerViews/homeView.dart';
+import 'drawerScreen.dart';
 
 class AddDataScreen extends StatelessWidget {
   final String value;
@@ -114,40 +114,43 @@ class AddDataScreen extends StatelessWidget {
             ),
           ),
           Obx(() {
-            return Padding(
-              padding:
-                  const EdgeInsets.only(left: 25, right: 25, top: 8, bottom: 2),
-              child: Container(
-                  height: 60,
-                  decoration: BoxDecoration(
-                      border:
-                          Border.all(color: CustomColors.orangeColor, width: 1),
-                      borderRadius: BorderRadius.all(Radius.circular(10))),
-                  child: Center(
-                      child: Padding(
-                    padding: const EdgeInsets.only(left: 5, right: 5),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Icon(
-                          Icons.hail,
-                          color: Colors.black54,
-                        ),
-                        Align(
-                          alignment: Alignment.centerLeft,
-                          child: Text(
-                            '${controller.selectedValue.value[0].toUpperCase()}${controller.selectedValue.value.substring(1).toLowerCase()}',
-                            style: TextStyle(color: Colors.black54),
+            return GestureDetector(
+              onTap: () => showService(context),
+              child: Padding(
+                padding: const EdgeInsets.only(
+                    left: 25, right: 25, top: 8, bottom: 2),
+                child: Container(
+                    height: 60,
+                    decoration: BoxDecoration(
+                        border: Border.all(
+                            color: CustomColors.orangeColor, width: 1),
+                        borderRadius: BorderRadius.all(Radius.circular(10))),
+                    child: Center(
+                        child: Padding(
+                      padding: const EdgeInsets.only(left: 5, right: 5),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Icon(
+                            Icons.hail,
+                            color: Colors.black54,
                           ),
-                        ),
-                        IconButton(
-                            onPressed: () {
-                              showService(context);
-                            },
-                            icon: Icon(Icons.arrow_drop_down))
-                      ],
-                    ),
-                  ))),
+                          Align(
+                            alignment: Alignment.centerLeft,
+                            child: Text(
+                              '${controller.selectedValue.value[0].toUpperCase()}${controller.selectedValue.value.substring(1).toLowerCase()}',
+                              style: TextStyle(color: Colors.black54),
+                            ),
+                          ),
+                          IconButton(
+                              onPressed: () {
+                                showService(context);
+                              },
+                              icon: Icon(Icons.arrow_drop_down))
+                        ],
+                      ),
+                    ))),
+              ),
             );
           }),
           Padding(
@@ -161,40 +164,43 @@ class AddDataScreen extends StatelessWidget {
             ),
           ),
           Obx(() {
-            return Padding(
-              padding:
-                  const EdgeInsets.only(left: 25, right: 25, top: 8, bottom: 2),
-              child: Container(
-                  height: 60,
-                  decoration: BoxDecoration(
-                      border:
-                          Border.all(color: CustomColors.orangeColor, width: 1),
-                      borderRadius: BorderRadius.all(Radius.circular(10))),
-                  child: Center(
-                      child: Padding(
-                    padding: const EdgeInsets.only(left: 5, right: 5),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Icon(
-                          Icons.location_city_outlined,
-                          color: Colors.black54,
-                        ),
-                        Align(
-                          alignment: Alignment.centerLeft,
-                          child: Text(
-                            '${controller.selectedCity.value[0].toUpperCase()}${controller.selectedCity.value.substring(1).toLowerCase()}',
-                            style: TextStyle(color: Colors.black54),
+            return GestureDetector(
+              onTap: () => showCitiesListDialog(context),
+              child: Padding(
+                padding: const EdgeInsets.only(
+                    left: 25, right: 25, top: 8, bottom: 2),
+                child: Container(
+                    height: 60,
+                    decoration: BoxDecoration(
+                        border: Border.all(
+                            color: CustomColors.orangeColor, width: 1),
+                        borderRadius: BorderRadius.all(Radius.circular(10))),
+                    child: Center(
+                        child: Padding(
+                      padding: const EdgeInsets.only(left: 5, right: 5),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Icon(
+                            Icons.location_city_outlined,
+                            color: Colors.black54,
                           ),
-                        ),
-                        IconButton(
-                            onPressed: () {
-                              showCitiesListDialog(context);
-                            },
-                            icon: Icon(Icons.arrow_drop_down))
-                      ],
-                    ),
-                  ))),
+                          Align(
+                            alignment: Alignment.centerLeft,
+                            child: Text(
+                              '${controller.selectedCity.value[0].toUpperCase()}${controller.selectedCity.value.substring(1).toLowerCase()}',
+                              style: TextStyle(color: Colors.black54),
+                            ),
+                          ),
+                          IconButton(
+                              onPressed: () {
+                                showCitiesListDialog(context);
+                              },
+                              icon: Icon(Icons.arrow_drop_down))
+                        ],
+                      ),
+                    ))),
+              ),
             );
           }),
           Padding(
@@ -371,7 +377,11 @@ class AddDataScreen extends StatelessWidget {
                                     controller.images.value, value);
                             if (response == 'Data added') {
                               controller.showLoadingBar(false);
-                              CustomToast.showToast('Proprty Added');
+                              // CustomToast.showToast('Proprty Added');
+                              Get.showSnackbar(GetSnackBar(
+                                message: 'Proprty Added',
+                                duration: Duration(milliseconds: 300),
+                              ));
                               sellPropertyController
                                   .getSellProprtyOfCurrentUser();
 
@@ -391,7 +401,7 @@ class AddDataScreen extends StatelessWidget {
                               controller.desEditTextController.clear();
                               controller.priceEditTextController.clear();
                               controller.images.value = [];
-                              Get.offAll(() => Home());
+                              Get.offAll(() => NavDrawerScreen());
                             } else {
                               controller.showLoadingBar(false);
                               Get.showSnackbar(GetSnackBar(
@@ -503,58 +513,53 @@ class AddDataScreen extends StatelessWidget {
               children: [
                 SizedBox(height: 16.0),
                 Obx(() {
-                  return GridView.builder(
-                    shrinkWrap: true,
-                    physics: NeverScrollableScrollPhysics(),
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      childAspectRatio: 3 / 2,
-                      mainAxisSpacing: 16.0,
-                      crossAxisSpacing: 16.0,
-                    ),
-                    itemCount: controller.values.length,
-                    itemBuilder: (context, index) {
-                      return InkWell(
-                        onTap: () {
-                          String serviceName = controller.values[index];
-                          controller.selectedValue.value = serviceName;
-                          Navigator.pop(context);
-                        },
-                        child: Container(
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(8.0),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black.withOpacity(0.1),
-                                blurRadius: 4.0,
-                                offset: Offset(0, 2),
+                  return ListView.builder(
+                      shrinkWrap: true,
+                      itemCount: controller.values.length,
+                      itemBuilder: (context, index) {
+                        return Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 16.0, vertical: 8.0),
+                          child: InkWell(
+                            onTap: () {
+                              String valName = controller.values[index];
+                              controller.selectedValue.value = valName;
+                              Navigator.pop(context);
+                            },
+                            child: Container(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 16.0, vertical: 12.0),
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(8.0),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black.withOpacity(0.1),
+                                    blurRadius: 4.0,
+                                    offset: Offset(0, 2),
+                                  ),
+                                ],
                               ),
-                            ],
+                              child: Row(
+                                children: [
+                                  Icon(
+                                    Icons.design_services,
+                                    color: CustomColors.orangeColor,
+                                  ),
+                                  SizedBox(width: 16.0),
+                                  Text(
+                                    '${controller.values[index]}',
+                                    style: TextStyle(
+                                      fontSize: 16.0,
+                                      fontWeight: FontWeight.normal,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
                           ),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Icon(
-                                Icons.work,
-                                color: CustomColors.orangeColor,
-                                size: 32.0,
-                              ),
-                              SizedBox(height: 8.0),
-                              Text(
-                                '${controller.values[index]}',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  fontSize: 16.0,
-                                  fontWeight: FontWeight.normal,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      );
-                    },
-                  );
+                        );
+                      });
                 }),
                 SizedBox(height: 16.0),
               ],

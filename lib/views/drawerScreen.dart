@@ -86,7 +86,7 @@ class NavDrawerScreen extends StatelessWidget {
                         authController.currentUser(false);
                         authController.update();
                         pageViewController.pageViewIndex.value = 0;
-                        Navigator.pop(context);
+                        Get.back();
                       },
                     ),
                   ),

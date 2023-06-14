@@ -6,6 +6,7 @@ import 'package:haider/controllers/currentUserInfoController.dart';
 import 'package:haider/controllers/sqfliteController.dart';
 import 'package:haider/models/propertyModel.dart';
 import 'package:haider/utills/customColors.dart';
+import 'package:photo_view/photo_view.dart';
 
 class PropertyDetail extends StatelessWidget {
   final PropertyModel data;
@@ -42,72 +43,89 @@ class PropertyDetail extends StatelessWidget {
                         },
                         scrollDirection: Axis.horizontal,
                         children: data.images.map((e) {
-                          return CachedNetworkImage(
-                            imageUrl: e,
-                            imageBuilder: (context, imageProvider) => Card(
-                              elevation: 3,
-                              shape: RoundedRectangleBorder(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(10)),
-                              ),
-                              clipBehavior: Clip.antiAlias,
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  image: DecorationImage(
-                                    image: imageProvider,
-                                    fit: BoxFit.cover,
+                          return Hero(
+                            tag: e,
+                            child: GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => Scaffold(
+                                      backgroundColor: Colors.black,
+                                      body: PhotoView(
+                                        imageProvider: NetworkImage(e),
+                                        backgroundDecoration:
+                                            BoxDecoration(color: Colors.black),
+                                        loadingBuilder: (context, event) =>
+                                            Center(
+                                                child:
+                                                    CircularProgressIndicator()),
+                                      ),
+                                    ),
+                                  ),
+                                );
+                              },
+                              child: CachedNetworkImage(
+                                imageUrl: e,
+                                imageBuilder: (context, imageProvider) =>
+                                    Container(
+                                  decoration: BoxDecoration(
+                                    image: DecorationImage(
+                                      image: imageProvider,
+                                      fit: BoxFit.cover,
+                                    ),
                                   ),
                                 ),
+                                placeholder: (context, url) =>
+                                    Center(child: CircularProgressIndicator()),
+                                errorWidget: (context, url, error) =>
+                                    Center(child: Icon(Icons.error)),
                               ),
                             ),
-                            placeholder: (context, url) =>
-                                Center(child: CircularProgressIndicator()),
-                            errorWidget: (context, url, error) =>
-                                Center(child: Icon(Icons.error)),
                           );
                         }).toList(),
                       ),
-                      Positioned(
-                        top: 5,
-                        right: 5,
-                        child: Obx(() {
-                          return Container(
-                            decoration: BoxDecoration(
-                              color: Colors.black26,
-                              shape: BoxShape.circle,
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.all(5.0),
-                              child: IconButton(
-                                icon: Icon(
-                                  Icons.favorite,
-                                  color:
-                                      sqfliliteController.isLiked.value == true
-                                          ? CustomColors.orangeColor
-                                          : Colors.white,
-                                ),
-                                onPressed: () async {
-                                  sqfliliteController.likePropertyModel
-                                      .likeProprtyId = data.docId;
+                      // Positioned(
+                      //   top: 5,
+                      //   right: 5,
+                      //   child: Obx(() {
+                      //     return Container(
+                      //       decoration: BoxDecoration(
+                      //         color: Colors.black26,
+                      //         shape: BoxShape.circle,
+                      //       ),
+                      //       child: Padding(
+                      //         padding: const EdgeInsets.all(5.0),
+                      //         child: IconButton(
+                      //           icon: Icon(
+                      //             Icons.favorite,
+                      //             color:
+                      //                 sqfliliteController.isLiked.value == true
+                      //                     ? CustomColors.orangeColor
+                      //                     : Colors.white,
+                      //           ),
+                      //           onPressed: () async {
+                      //             sqfliliteController.likePropertyModel
+                      //                 .likeProprtyId = data.docId;
 
-                                  String res = await sqfliliteController
-                                      .sqfliteService
-                                      .addToLike(sqfliliteController
-                                          .likePropertyModel);
+                      //             String res = await sqfliliteController
+                      //                 .sqfliteService
+                      //                 .addToLike(sqfliliteController
+                      //                     .likePropertyModel);
 
-                                  if (res == 'added') {
-                                    print("added");
-                                  } else {
-                                    print("removed");
-                                  }
+                      //             if (res == 'added') {
+                      //               print("added");
+                      //             } else {
+                      //               print("removed");
+                      //             }
 
-                                  sqfliliteController.getLIkiedOnly(data.docId);
-                                },
-                              ),
-                            ),
-                          );
-                        }),
-                      ),
+                      //             sqfliliteController.getLIkiedOnly(data.docId);
+                      //           },
+                      //         ),
+                      //       ),
+                      //     );
+                      //   }),
+                      // ),
                     ],
                   ),
                 ),
