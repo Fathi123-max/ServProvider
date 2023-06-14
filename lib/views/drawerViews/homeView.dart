@@ -39,14 +39,14 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: ConvexAppBar(
-        height: 50,
+        height: 55,
         controller: _tabController,
         backgroundColor: CustomColors.orangeColor,
         items: [
           TabItem(icon: Icons.home, title: 'Home'.tr),
           TabItem(icon: Icons.design_services_sharp, title: 'Services'.tr),
           TabItem(icon: Icons.add, title: 'Add Service'.tr),
-          TabItem(icon: Icons.people, title: 'My Services'),
+          TabItem(icon: Icons.people, title: 'My Services'.tr),
         ],
         onTap: (int i) {
           _pageIndex.value = i;

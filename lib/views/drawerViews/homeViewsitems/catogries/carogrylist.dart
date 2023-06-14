@@ -7,7 +7,8 @@ import '../../../propertyDetailScreen.dart';
 
 class catogrylist extends StatelessWidget {
   // const RentOutView({Key key}) : super(key: key);
-  final RentAndRentOutController rentOutController = Get.find();
+  final RentAndRentOutController rentOutController =
+      Get.put(RentAndRentOutController());
 
   TextEditingController textEditingController = TextEditingController();
 
@@ -20,16 +21,21 @@ class catogrylist extends StatelessWidget {
       mainAxisSpacing: 10,
       crossAxisSpacing: 10,
       children: [
-        _buildServiceCategory('Home'.tr, "assets/images/logo.png"),
-        _buildServiceCategory('Plumbing', "assets/images/logo.png"),
-        _buildServiceCategory('Plumbing', "assets/images/logo.png"),
-        _buildServiceCategory('Carpentry', "assets/images/logo.png"),
-        _buildServiceCategory('Gardening', "assets/images/logo.png"),
-        _buildServiceCategory('Cleaning', "assets/images/logo.png"),
-        _buildServiceCategory('Plumbing', "assets/images/logo.png"),
-        _buildServiceCategory('Electrician', "assets/images/logo.png"),
-        _buildServiceCategory('Carpentry', "assets/images/logo.png"),
-        _buildServiceCategory('Gardening', "assets/images/logo.png"),
+        _buildServiceCategory('Color Man'.tr, "assets/images/logo.png"),
+        _buildServiceCategory('Mecanical'.tr, "assets/images/logo.png"),
+        _buildServiceCategory('Ground Man'.tr, "assets/images/logo.png"),
+        _buildServiceCategory('Plumbing'.tr, "assets/images/logo.png"),
+        _buildServiceCategory('Electrician'.tr, "assets/images/logo.png"),
+        _buildServiceCategory('Carpentry'.tr, "assets/images/logo.png"),
+        _buildServiceCategory('Gardening'.tr, "assets/images/logo.png"),
+        _buildServiceCategory('Cleaning Houses'.tr, "assets/images/logo.png"),
+        _buildServiceCategory('Blacksmith'.tr, "assets/images/logo.png"),
+        _buildServiceCategory('Tiling'.tr, "assets/images/logo.png"),
+        _buildServiceCategory('Teacher'.tr, "assets/images/logo.png"),
+        _buildServiceCategory('Chef'.tr, "assets/images/logo.png"),
+        _buildServiceCategory('Driver'.tr, "assets/images/logo.png"),
+        _buildServiceCategory('Nurse'.tr, "assets/images/logo.png"),
+        _buildServiceCategory('Baby setter'.tr, "assets/images/logo.png"),
       ],
     ));
   }

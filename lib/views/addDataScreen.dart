@@ -88,7 +88,7 @@ class AddDataScreen extends StatelessWidget {
                     borderRadius: new BorderRadius.circular(10.0),
                     borderSide:
                         new BorderSide(color: CustomColors.orangeColor)),
-                labelText: 'Enter your Service',
+                labelText: 'Enter your Service'.tr,
                 labelStyle: TextStyle(color: Colors.grey),
                 prefixIcon: Icon(
                   Icons.work,
@@ -241,7 +241,7 @@ class AddDataScreen extends StatelessWidget {
                     borderRadius: new BorderRadius.circular(10.0),
                     borderSide:
                         new BorderSide(color: CustomColors.orangeColor)),
-                labelText: 'Area',
+                labelText: 'Area'.tr,
                 labelStyle: TextStyle(color: Colors.grey),
                 prefixIcon: Icon(
                   Icons.location_on,
@@ -295,7 +295,7 @@ class AddDataScreen extends StatelessWidget {
                     borderRadius: new BorderRadius.circular(10.0),
                     borderSide:
                         new BorderSide(color: CustomColors.orangeColor)),
-                labelText: 'Description',
+                labelText: 'Description'.tr,
                 labelStyle: TextStyle(color: Colors.grey),
               ),
               validator: (value) {
@@ -315,7 +315,7 @@ class AddDataScreen extends StatelessWidget {
                 style: ElevatedButton.styleFrom(
                     minimumSize: Size(100, 40),
                     primary: CustomColors.orangeColor),
-                child: Text("Select Images"),
+                child: Text("Select Images".tr),
                 onPressed: () {
                   controller.getImage();
                 }),
@@ -359,7 +359,7 @@ class AddDataScreen extends StatelessWidget {
                       style: ElevatedButton.styleFrom(
                           minimumSize: Size(200, 50),
                           backgroundColor: CustomColors.lioghtGrey),
-                      child: Text("Save Property"),
+                      child: Text("Save Property".tr),
                       onPressed: () async {
                         if (controller.images.value.isEmpty) {
                           CustomToast.showToast('Please Select images');

@@ -10,20 +10,26 @@ class AddPropertyController extends GetxController {
   var showLoadingBar = false.obs;
   var selectedCity = 'dammita'.obs;
   // var citieslist = <CityModel>[CityModel("cairo")].obs;
-  var citieslist2 = ["cairo", 'Dammita', "Farscore"].obs;
+  var citieslist2 =
+      ["Kar Albattikh".tr, 'Dammita'.tr, "new Dammita".tr, "Kar Saad".tr].obs;
 
   var values = <String>[
-    'Home',
-    'Appartment',
-    "Plumbing",
-    "Electrician",
-    'Carpentry',
-    'Gardening',
-    'Cleaning',
-    'Plumbing',
-    'Electrician',
-    'Carpentry',
-    'Gardening'
+    'Driver'.tr,
+    'Appartment'.tr,
+    "Plumbing".tr,
+    "Carpentry".tr,
+    'Gardening'.tr,
+    'Cleaning Houses'.tr,
+    'Electrician'.tr,
+    'Blacksmith'.tr,
+    'Tiling'.tr,
+    'Teacher'.tr,
+    'Gardening'.tr,
+    'Nurse'.tr,
+    'Mecanical'.tr,
+    'Baby setter'.tr,
+    'Color Man'.tr,
+    'Ground Man'.tr
   ].obs;
   var selectedValue = 'Home'.tr.obs;
   var selectedColor = CustomColors.orangeColor.obs;

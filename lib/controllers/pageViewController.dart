@@ -15,8 +15,8 @@ class PageViewController extends GetxController {
 
   var pageViewIndex = 0.obs;
   var pageViewItems = [
-    RentView(),
     catogrylist(),
+    RentView(),
     AddDataScreen(
       value: '',
     ),

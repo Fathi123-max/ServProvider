@@ -163,7 +163,7 @@ class PropertyDetail extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.only(left: 15, top: 5, right: 15),
                   child: Text(
-                    'Description',
+                    'Description'.tr,
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),
                 ),
@@ -178,7 +178,7 @@ class PropertyDetail extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.only(left: 15, top: 5, right: 15),
                   child: Text(
-                    'address',
+                    'address'.tr,
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),
                 ),
