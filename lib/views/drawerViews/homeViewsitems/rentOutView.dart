@@ -87,7 +87,7 @@ class RentOutView extends StatelessWidget {
                                           .address,
                                       style: TextStyle(
                                         fontWeight: FontWeight.bold,
-                                        fontSize: 16,
+                                        fontSize: 12,
                                       ),
                                     ),
                                     SizedBox(height: 4),

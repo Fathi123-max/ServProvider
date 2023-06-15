@@ -8,15 +8,14 @@ import 'package:multi_image_picker/multi_image_picker.dart';
 class AddPropertyController extends GetxController {
   //Variables
   var showLoadingBar = false.obs;
-  var selectedCity = 'dammita'.obs;
+  var selectedCity = 'دمياط'.obs;
   // var citieslist = <CityModel>[CityModel("cairo")].obs;
   var citieslist2 =
-      ["Kar Albattikh".tr, 'Dammita'.tr, "new Dammita".tr, "Kar Saad".tr].obs;
+      ['Kar Albattikh'.tr, 'Dammita'.tr, "new Dammita".tr, "Kar Saad".tr].obs;
 
   var values = <String>[
-    'Driver'.tr,
-    'Appartment'.tr,
-    "Plumbing".tr,
+    'Driver',
+    "Plumbing",
     "Carpentry".tr,
     'Gardening'.tr,
     'Cleaning Houses'.tr,
@@ -29,9 +28,10 @@ class AddPropertyController extends GetxController {
     'Mecanical'.tr,
     'Baby setter'.tr,
     'Color Man'.tr,
-    'Ground Man'.tr
+    'Ground Man'.tr,
+    'other'.tr,
   ].obs;
-  var selectedValue = 'Home'.tr.obs;
+  var selectedValue = 'Carpentry'.obs;
   var selectedColor = CustomColors.orangeColor.obs;
   var unSelectedColor = CustomColors.greyColor.obs;
   var images = <Asset>[].obs;
@@ -66,6 +66,6 @@ class AddPropertyController extends GetxController {
   void onInit() {
     super.onInit();
 
-    // getCitiesData();
+    //  getCitiesData();
   }
 }

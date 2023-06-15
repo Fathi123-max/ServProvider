@@ -12,6 +12,7 @@ class NavDrawerScreen extends StatelessWidget {
   final DraweController draweController = Get.put(DraweController());
   final PageViewController pageViewController = Get.put(PageViewController());
   final box = GetStorage();
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -100,35 +101,37 @@ class NavDrawerScreen extends StatelessWidget {
           ),
           color: Colors.white,
         )),
-        appBar: AppBar(
-          centerTitle: true,
-          elevation: 0.0,
-          // centerTitle: true,
-          title: Obx(() {
-            return Text(
-              draweController.selectedDrawerIndex.value == 2
-                  ? 'Account Setting'.tr
-                  : 'Services'.tr,
-              style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: CustomColors.greyColor,
-                  fontSize: 22),
-            );
-          }),
-          actions: [
-            IconButton(
-                onPressed: () {
-                  // Get.to(() => ExampleScreen());
-                  Get.updateLocale(const Locale('ar', 'EG'));
-                  // Get.changeTheme(Get.isDarkMode
-                  //     ? ThemeData.light(useMaterial3: true)
-                  //     : ThemeData.dark(
-                  //         useMaterial3: true,
-                  //       ));
-                },
-                icon: Icon(Icons.dark_mode)),
-          ],
-        ),
+
+        // appBar: AppBar(
+        //   centerTitle: true,
+        //   elevation: 0.0,
+        //   // centerTitle: true,
+        //   title: Obx(() {
+        //     return Text(
+        //       draweController.selectedDrawerIndex.value == 2
+        //           ? 'Account Setting'.tr
+        //           : 'Services'.tr,
+        //       style: TextStyle(
+        //           fontWeight: FontWeight.bold,
+        //           color: CustomColors.greyColor,
+        //           fontSize: 22),
+        //     );
+        //   }),
+        //   actions: [
+        //     IconButton(
+        //         onPressed: () {
+        //           // Get.to(() => ExampleScreen());
+        //           Get.updateLocale(const Locale('ar', 'EG'));
+        //           // Get.changeTheme(Get.isDarkMode
+        //           //     ? ThemeData.light(useMaterial3: true)
+        //           //     : ThemeData.dark(
+        //           //         useMaterial3: true,
+        //           //       ));
+        //         },
+        //         icon: Icon(Icons.dark_mode)),
+        //   ],
+        // ),
+
         body: Obx(() {
           return IndexedStack(
             index: draweController.selectedDrawerIndex.value,

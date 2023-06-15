@@ -7,19 +7,23 @@ import 'package:haider/controllers/getSellAndBuyPropertController.dart';
 import 'package:haider/controllers/rentAndRentOutController.dart';
 import 'package:haider/utills/customColors.dart';
 import 'package:haider/utills/customToast.dart';
+import 'package:haider/views/drawerViews/homeView.dart';
 import 'package:multi_image_picker/multi_image_picker.dart';
-
-import 'drawerScreen.dart';
 
 class AddDataScreen extends StatelessWidget {
   final String value;
-  final box = GetStorage();
+
   AddDataScreen({required this.value});
 
+  final box = GetStorage();
+
   final AddPropertyController controller = Get.put(AddPropertyController());
+
   final GetSellAndBuyPropertyController sellPropertyController =
       Get.put(GetSellAndBuyPropertyController());
+
   final RentAndRentOutController rentAndRentOutController = Get.find();
+
   final CurrentUserInfoController currentUserInfoController =
       Get.put(CurrentUserInfoController());
 
@@ -139,7 +143,8 @@ class AddDataScreen extends StatelessWidget {
                           Align(
                             alignment: Alignment.centerLeft,
                             child: Text(
-                              '${controller.selectedValue.value[0].toUpperCase()}${controller.selectedValue.value.substring(1).toLowerCase()}',
+                              "${Get.put(AddPropertyController()).selectedValue}"
+                                  .tr,
                               style: TextStyle(color: Colors.black54),
                             ),
                           ),
@@ -403,7 +408,7 @@ class AddDataScreen extends StatelessWidget {
                               controller.desEditTextController.clear();
                               controller.priceEditTextController.clear();
                               controller.images.value = [];
-                              Get.offAll(() => NavDrawerScreen());
+                              Get.offAll(() => Home());
                             } else {
                               controller.showLoadingBar(false);
                               Get.showSnackbar(GetSnackBar(
@@ -441,15 +446,20 @@ class AddDataScreen extends StatelessWidget {
                 Obx(() {
                   return ListView.builder(
                       shrinkWrap: true,
-                      itemCount: controller.citieslist2.length,
+                      itemCount:
+                          Get.put(AddPropertyController()).citieslist2.length,
                       itemBuilder: (context, index) {
                         return Padding(
                           padding: const EdgeInsets.symmetric(
                               horizontal: 16.0, vertical: 8.0),
                           child: InkWell(
                             onTap: () {
-                              String cityName = controller.citieslist2[index];
-                              controller.selectedCity.value = cityName;
+                              String cityName = Get.put(AddPropertyController())
+                                  .citieslist2[index]
+                                  .tr;
+                              Get.put(AddPropertyController())
+                                  .selectedCity
+                                  .value = cityName;
                               Navigator.pop(context);
                             },
                             child: Container(
@@ -474,7 +484,7 @@ class AddDataScreen extends StatelessWidget {
                                   ),
                                   SizedBox(width: 16.0),
                                   Text(
-                                    '${controller.citieslist2[index]}',
+                                    '${Get.put(AddPropertyController()).citieslist2[index].tr}',
                                     style: TextStyle(
                                       fontSize: 16.0,
                                       fontWeight: FontWeight.normal,
@@ -498,84 +508,83 @@ class AddDataScreen extends StatelessWidget {
       context: context,
       barrierDismissible: true,
       builder: (BuildContext context) {
+        Get.put(AddPropertyController);
         return AlertDialog(
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(16.0),
           ),
           title: Text(
-            'Select Service',
+            'Select Service'.tr,
             style: TextStyle(
               color: Colors.black,
               fontWeight: FontWeight.bold,
             ),
           ),
-          content: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                SizedBox(height: 16.0),
-                Obx(() {
-                  return ListView.builder(
-                      shrinkWrap: true,
-                      itemCount: controller.values.length,
-                      itemBuilder: (context, index) {
-                        return Padding(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 16.0, vertical: 8.0),
-                          child: InkWell(
-                            onTap: () {
-                              String valName = controller.values[index];
-                              controller.selectedValue.value = valName;
-                              Navigator.pop(context);
-                            },
-                            child: Container(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 16.0, vertical: 12.0),
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(8.0),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.black.withOpacity(0.1),
-                                    blurRadius: 4.0,
-                                    offset: Offset(0, 2),
+          content: Obx(() {
+            return ListView.builder(
+                shrinkWrap: true,
+                itemCount: Get.put(AddPropertyController()).values.length,
+                itemBuilder: (context, index) {
+                  return Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 16.0, vertical: 8.0),
+                        child: InkWell(
+                          onTap: () {
+                            String valName = Get.put(AddPropertyController())
+                                .values[index]
+                                .tr;
+                            Get.put(AddPropertyController())
+                                .selectedValue
+                                .value = valName;
+                            Navigator.pop(context);
+                          },
+                          child: Container(
+                            width: 200,
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 16.0, vertical: 12.0),
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(8.0),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black.withOpacity(0.1),
+                                  blurRadius: 4.0,
+                                  offset: Offset(0, 2),
+                                ),
+                              ],
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Icon(
+                                  Icons.design_services,
+                                  color: CustomColors.orangeColor,
+                                ),
+                                SizedBox(width: 16.0),
+                                Text(
+                                  '${Get.put(AddPropertyController()).values[index].tr}',
+                                  style: TextStyle(
+                                    fontSize: 16.0,
+                                    fontWeight: FontWeight.normal,
                                   ),
-                                ],
-                              ),
-                              child: Row(
-                                children: [
-                                  Icon(
-                                    Icons.design_services,
-                                    color: CustomColors.orangeColor,
-                                  ),
-                                  SizedBox(width: 16.0),
-                                  Text(
-                                    '${controller.values[index]}',
-                                    style: TextStyle(
-                                      fontSize: 16.0,
-                                      fontWeight: FontWeight.normal,
-                                    ),
-                                  ),
-                                ],
-                              ),
+                                ),
+                              ],
                             ),
                           ),
-                        );
-                      });
-                }),
-                SizedBox(height: 16.0),
-              ],
-            ),
-          ),
+                        ),
+                      ),
+                    ],
+                  );
+                });
+          }),
         );
       },
     );
   }
 }
-
-
-
-
 
 // showDialog(
 //   context: context,

@@ -6,12 +6,13 @@ class Languages extends Translations {
         'ar_EG': {
           'Service Name': 'اسم الخدمه',
           'Add Service': 'إضافة خدمة',
-          'Services': ' الخدمات',
-          'Home': 'الصفحة الرئيسية',
+          'Services': 'خدمات',
+          'Home': ' الرئيسية',
           'Description': ' الوصف',
           'address': 'العنوان ',
           'Service Provider': 'مقدم الخدمة',
           'Type of Service': 'نوع الخدمة',
+          'Select Service': 'اختر الخدمة',
           'Select City': 'اختر المدينة',
           'Select Area': 'اختر المنطقة',
           'Select Images': 'اختر الصور',
@@ -23,11 +24,9 @@ class Languages extends Translations {
           'Next': 'التالي ',
           'Enter your information': 'أدخل معلوماتك ',
           'Enter your Service': 'أدخل اسم خدمتك ',
-          'Enter Service details to listed on Services':
-              ' أدخل تفاصيل الخدمة لتدرجها في الخدمات',
           'Area': ' المنطقة',
-          "Plumbing": "سباكة",
-          "Carpentry": "نجارة",
+          "Plumbing": "سباك",
+          "Carpentry": "نجار",
           "Gardening": " تنسيق الحدائق ",
           "Cleaning Houses": " تنظيف منازل",
           "Electrician": "كهربائي",
@@ -46,6 +45,9 @@ class Languages extends Translations {
           "Baby setter": "جليسه اطفال",
           "Color Man": "نقاش ",
           "Ground Man": "مبلط",
+          "other": "اخري",
+          'Enter Service details to listed on Services':
+              ' أدخل تفاصيل الخدمة لتدرجها في الخدمات',
         },
       };
 }

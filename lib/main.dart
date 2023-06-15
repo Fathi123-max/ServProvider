@@ -7,8 +7,6 @@ import 'package:haider/utills/localzation.dart';
 import 'package:haider/views/choosescreen.dart';
 import 'package:haider/views/drawerScreen.dart';
 
-import 'controllers/currentUserInfoController.dart';
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
@@ -19,7 +17,6 @@ void main() async {
 
     statusBarColor: Colors.white, // status bar color
   ));
-  final box = GetStorage();
   runApp(MyApp());
 }
 
@@ -40,9 +37,9 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       translations: Languages(),
-      locale: Get.deviceLocale,
-      fallbackLocale: const Locale('ar', 'EG'),
-      onInit: () => CurrentUserInfoController(),
+      locale: const Locale('ar', 'EG'),
+      // fallbackLocale: const Locale('ar', 'EG'),
+      // onInit: () => AddPropertyController(),
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(

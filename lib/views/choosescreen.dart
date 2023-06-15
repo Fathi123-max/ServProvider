@@ -137,7 +137,7 @@ class _EnterInfoState extends State<EnterInfo> {
                 child: InkWell(
                   onTap: _isButtonEnabled
                       ? () {
-                          box.write('Name'.tr, _nameController.text);
+                          box.write('name', _nameController.text);
                           box.write('phone', _phoneController.text);
                           Get.offAll(() => NavDrawerScreen());
                         }

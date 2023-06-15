@@ -1,8 +1,13 @@
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:haider/controllers/pageViewController.dart';
 import 'package:haider/utills/customColors.dart';
+import 'package:haider/views/drawerViews/homeViewsitems/accountSetttings.dart';
+
+import '../../controllers/draweController.dart';
+import '../choosescreen.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -14,7 +19,8 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   late TabController _tabController;
   final ValueNotifier<int> _pageIndex = ValueNotifier<int>(0);
   final PageViewController pageViewController = Get.put(PageViewController());
-
+  final DraweController draweController = Get.put(DraweController());
+  final box = GetStorage();
   @override
   void initState() {
     super.initState();
@@ -38,6 +44,114 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: Drawer(
+          child: Container(
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                children: [
+                  Image.asset(
+                    'assets/images/logo.png',
+                    height: 200,
+                  ),
+                ],
+              ),
+            ),
+            Expanded(
+              child: ListView.builder(
+                  // shrinkWrap: true,
+                  itemCount: draweController.drawerItemsList.length,
+                  itemBuilder: (context, index) {
+                    return ListTile(
+                      leading: Icon(
+                        draweController.drawerItemsList[index].icon,
+                        color: draweController.selectedDrawerIndex == index
+                            ? CustomColors.orangeColor
+                            : CustomColors.greyColor,
+                      ),
+                      title: Text(
+                        draweController.drawerItemsList[index].title,
+                        style: TextStyle(
+                            fontWeight:
+                                draweController.selectedDrawerIndex == index
+                                    ? FontWeight.bold
+                                    : FontWeight.normal,
+                            color: draweController.selectedDrawerIndex == index
+                                ? CustomColors.orangeColor
+                                : CustomColors.greyColor),
+                      ),
+                      onTap: () {
+                        print(index);
+                        index == 1 ? Get.to(() => AccountSettings()) : null;
+                        // draweController.update();
+                        // pageViewController.pageViewIndex.value = 0;
+                        // Navigator.pop(context);
+                      },
+                    );
+                  }),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Container(
+                decoration: BoxDecoration(
+                    color: CustomColors.orangeColor,
+                    borderRadius: BorderRadius.circular(10)),
+                child: Center(
+                  child: ListTile(
+                    leading: Icon(
+                      Icons.logout_outlined,
+                      color: Colors.white,
+                    ),
+                    title: Text(
+                      'Log Out'.tr,
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold, color: Colors.white),
+                    ),
+                    onTap: () async {
+                      // await FirebaseAuth.instance.signOut();
+                      // authController.currentUser(false);
+                      // authController.update();
+                      // pageViewController.pageViewIndex.value = 0;
+                      box.remove('name');
+                      box.remove('phone');
+
+                      Get.offAll(() => EnterInfo());
+                    },
+                  ),
+                ),
+              ),
+            )
+          ],
+        ),
+        color: Colors.white,
+      )),
+      appBar: AppBar(
+        centerTitle: true,
+        elevation: 0.0,
+        // centerTitle: true,
+        title: Text(
+          'Services'.tr,
+          style: TextStyle(
+              fontWeight: FontWeight.bold,
+              color: CustomColors.greyColor,
+              fontSize: 22),
+        ),
+        actions: [
+          IconButton(
+              onPressed: () {
+                // Get.to(() => ExampleScreen());
+                // Get.updateLocale(const Locale('ar', 'EG'));
+                // Get.changeTheme(Get.isDarkMode
+                //     ? ThemeData.light(useMaterial3: true)
+                //     : ThemeData.dark(
+                //         useMaterial3: true,
+                //       ));
+              },
+              icon: Icon(Icons.info)),
+        ],
+      ),
       bottomNavigationBar: ConvexAppBar(
         height: 55,
         controller: _tabController,

@@ -22,9 +22,12 @@ class PropertyDetail extends StatelessWidget {
     sqfliliteController.getLIkiedOnly(data.docId);
     return Scaffold(
         appBar: AppBar(
-          leading: IconButton(
-              onPressed: () => Get.back(),
-              icon: Icon(Icons.arrow_back_ios_new)),
+          automaticallyImplyLeading: false,
+          actions: [
+            IconButton(
+                onPressed: () => Get.back(),
+                icon: Icon(Icons.arrow_back_ios_new)),
+          ],
           elevation: 0.0,
         ),
         body: SingleChildScrollView(

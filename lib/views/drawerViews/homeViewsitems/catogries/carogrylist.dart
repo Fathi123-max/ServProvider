@@ -21,21 +21,23 @@ class catogrylist extends StatelessWidget {
       mainAxisSpacing: 10,
       crossAxisSpacing: 10,
       children: [
-        _buildServiceCategory('Color Man'.tr, "assets/images/logo.png"),
-        _buildServiceCategory('Mecanical'.tr, "assets/images/logo.png"),
-        _buildServiceCategory('Ground Man'.tr, "assets/images/logo.png"),
-        _buildServiceCategory('Plumbing'.tr, "assets/images/logo.png"),
-        _buildServiceCategory('Electrician'.tr, "assets/images/logo.png"),
-        _buildServiceCategory('Carpentry'.tr, "assets/images/logo.png"),
-        _buildServiceCategory('Gardening'.tr, "assets/images/logo.png"),
-        _buildServiceCategory('Cleaning Houses'.tr, "assets/images/logo.png"),
-        _buildServiceCategory('Blacksmith'.tr, "assets/images/logo.png"),
-        _buildServiceCategory('Tiling'.tr, "assets/images/logo.png"),
-        _buildServiceCategory('Teacher'.tr, "assets/images/logo.png"),
-        _buildServiceCategory('Chef'.tr, "assets/images/logo.png"),
-        _buildServiceCategory('Driver'.tr, "assets/images/logo.png"),
-        _buildServiceCategory('Nurse'.tr, "assets/images/logo.png"),
-        _buildServiceCategory('Baby setter'.tr, "assets/images/logo.png"),
+        _buildServiceCategory('Color Man'.tr, "assets/images/naqqash.jpeg"),
+        _buildServiceCategory('Mecanical'.tr, "assets/images/mecancal.jpeg"),
+        _buildServiceCategory('Ground Man'.tr, "assets/images/ballat.jpeg"),
+        _buildServiceCategory('Plumbing'.tr, "assets/images/sabbak.jpeg"),
+        _buildServiceCategory('Electrician'.tr, "assets/images/elctr.jpeg"),
+        _buildServiceCategory('Carpentry'.tr, "assets/images/carpenter.jpeg"),
+        _buildServiceCategory('Gardening'.tr, "assets/images/formar.jpeg"),
+        _buildServiceCategory('Cleaning Houses'.tr, "assets/images/house.jpeg"),
+        _buildServiceCategory('Blacksmith'.tr, "assets/images/hadad.jpeg"),
+        _buildServiceCategory('Tiling'.tr, "assets/images/tarze.jpeg"),
+        _buildServiceCategory('Teacher'.tr, "assets/images/techer.jpeg"),
+        _buildServiceCategory('Chef'.tr, "assets/images/chef.jpeg"),
+        _buildServiceCategory('Driver'.tr, "assets/images/driver.jpeg"),
+        _buildServiceCategory('Nurse'.tr, "assets/images/nurs.jpeg"),
+        _buildServiceCategory(
+            'Baby setter'.tr, "assets/images/babykeeper.jpeg"),
+        _buildServiceCategory('other'.tr, "assets/images/logo.png"),
       ],
     ));
   }
@@ -107,8 +109,12 @@ class _catogryViewState extends State<catogryView> {
 
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(
-            onPressed: () => Get.back(), icon: Icon(Icons.arrow_back_ios_new)),
+        automaticallyImplyLeading: false,
+        actions: [
+          IconButton(
+              onPressed: () => Get.back(),
+              icon: Icon(Icons.arrow_back_ios_new)),
+        ],
         elevation: 0.0,
       ),
       body: Obx(() {
@@ -179,7 +185,7 @@ class _catogryViewState extends State<catogryView> {
                                             .allcatList[index].address,
                                         style: TextStyle(
                                           fontWeight: FontWeight.bold,
-                                          fontSize: 16,
+                                          fontSize: 12,
                                         ),
                                       ),
                                       SizedBox(height: 4),
