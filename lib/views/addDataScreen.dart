@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:haider/controllers/addpropertyController.dart';
+import 'package:haider/controllers/catogryconroller.dart';
 import 'package:haider/controllers/currentUserInfoController.dart';
 import 'package:haider/controllers/getSellAndBuyPropertController.dart';
 import 'package:haider/controllers/rentAndRentOutController.dart';
@@ -9,6 +10,8 @@ import 'package:haider/utills/customColors.dart';
 import 'package:haider/utills/customToast.dart';
 import 'package:haider/views/drawerViews/homeView.dart';
 import 'package:multi_image_picker/multi_image_picker.dart';
+
+import '../controllers/citycontroller.dart';
 
 class AddDataScreen extends StatelessWidget {
   final String value;
@@ -446,16 +449,16 @@ class AddDataScreen extends StatelessWidget {
                 Obx(() {
                   return ListView.builder(
                       shrinkWrap: true,
-                      itemCount:
-                          Get.put(AddPropertyController()).citieslist2.length,
+                      itemCount: Get.put(CityController()).cityList.length,
                       itemBuilder: (context, index) {
                         return Padding(
                           padding: const EdgeInsets.symmetric(
                               horizontal: 16.0, vertical: 8.0),
                           child: InkWell(
                             onTap: () {
-                              String cityName = Get.put(AddPropertyController())
-                                  .citieslist2[index]
+                              String cityName = Get.put(CityController())
+                                  .cityList[index]
+                                  .cityname!
                                   .tr;
                               Get.put(AddPropertyController())
                                   .selectedCity
@@ -477,18 +480,20 @@ class AddDataScreen extends StatelessWidget {
                                 ],
                               ),
                               child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Icon(
-                                    Icons.location_city,
-                                    color: CustomColors.orangeColor,
-                                  ),
-                                  SizedBox(width: 16.0),
                                   Text(
-                                    '${Get.put(AddPropertyController()).citieslist2[index].tr}',
+                                    '${Get.put(CityController()).cityList[index].cityname!.tr}',
                                     style: TextStyle(
                                       fontSize: 16.0,
                                       fontWeight: FontWeight.normal,
                                     ),
+                                  ),
+                                  SizedBox(width: 16.0),
+                                  Icon(
+                                    Icons.location_city,
+                                    color: CustomColors.orangeColor,
                                   ),
                                 ],
                               ),
@@ -523,7 +528,7 @@ class AddDataScreen extends StatelessWidget {
           content: Obx(() {
             return ListView.builder(
                 shrinkWrap: true,
-                itemCount: Get.put(AddPropertyController()).values.length,
+                itemCount: Get.put(catogryController()).catogryList.length,
                 itemBuilder: (context, index) {
                   return Row(
                     mainAxisAlignment: MainAxisAlignment.end,
@@ -533,8 +538,9 @@ class AddDataScreen extends StatelessWidget {
                             horizontal: 16.0, vertical: 8.0),
                         child: InkWell(
                           onTap: () {
-                            String valName = Get.put(AddPropertyController())
-                                .values[index]
+                            String valName = Get.put(catogryController())
+                                .catogryList[index]
+                                .catogryname!
                                 .tr;
                             Get.put(AddPropertyController())
                                 .selectedValue
@@ -559,17 +565,17 @@ class AddDataScreen extends StatelessWidget {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Icon(
-                                  Icons.design_services,
-                                  color: CustomColors.orangeColor,
-                                ),
-                                SizedBox(width: 16.0),
                                 Text(
-                                  '${Get.put(AddPropertyController()).values[index].tr}',
+                                  '${Get.put(catogryController()).catogryList[index].catogryname!.tr}',
                                   style: TextStyle(
                                     fontSize: 16.0,
                                     fontWeight: FontWeight.normal,
                                   ),
+                                ),
+                                SizedBox(width: 16.0),
+                                Icon(
+                                  Icons.design_services,
+                                  color: CustomColors.orangeColor,
                                 ),
                               ],
                             ),

@@ -1,12 +1,14 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:haider/controllers/currentUserInfoController.dart';
-import 'package:haider/controllers/sqfliteController.dart';
 import 'package:haider/models/propertyModel.dart';
 import 'package:haider/utills/customColors.dart';
 import 'package:photo_view/photo_view.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:whatsapp_unilink/whatsapp_unilink.dart';
 
 class PropertyDetail extends StatelessWidget {
   final PropertyModel data;
@@ -15,11 +17,21 @@ class PropertyDetail extends StatelessWidget {
 
   final CurrentUserInfoController controller =
       Get.put(CurrentUserInfoController());
-  final SqfliliteController sqfliliteController =
-      Get.put(SqfliliteController());
+  // final SqfliliteController sqfliliteController =
+  //     Get.put(SqfliliteController());
+
+  launchWhatsApp() async {
+    try {
+      final link = WhatsAppUnilink(phoneNumber: data.bedrooms, text: "");
+      await launch('$link');
+    } catch (e) {
+      print(e);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    sqfliliteController.getLIkiedOnly(data.docId);
+    // sqfliliteController.getLIkiedOnly(data.docId);
     return Scaffold(
         appBar: AppBar(
           automaticallyImplyLeading: false,
@@ -88,47 +100,6 @@ class PropertyDetail extends StatelessWidget {
                           );
                         }).toList(),
                       ),
-                      // Positioned(
-                      //   top: 5,
-                      //   right: 5,
-                      //   child: Obx(() {
-                      //     return Container(
-                      //       decoration: BoxDecoration(
-                      //         color: Colors.black26,
-                      //         shape: BoxShape.circle,
-                      //       ),
-                      //       child: Padding(
-                      //         padding: const EdgeInsets.all(5.0),
-                      //         child: IconButton(
-                      //           icon: Icon(
-                      //             Icons.favorite,
-                      //             color:
-                      //                 sqfliliteController.isLiked.value == true
-                      //                     ? CustomColors.orangeColor
-                      //                     : Colors.white,
-                      //           ),
-                      //           onPressed: () async {
-                      //             sqfliliteController.likePropertyModel
-                      //                 .likeProprtyId = data.docId;
-
-                      //             String res = await sqfliliteController
-                      //                 .sqfliteService
-                      //                 .addToLike(sqfliliteController
-                      //                     .likePropertyModel);
-
-                      //             if (res == 'added') {
-                      //               print("added");
-                      //             } else {
-                      //               print("removed");
-                      //             }
-
-                      //             sqfliliteController.getLIkiedOnly(data.docId);
-                      //           },
-                      //         ),
-                      //       ),
-                      //     );
-                      //   }),
-                      // ),
                     ],
                   ),
                 ),
@@ -217,6 +188,8 @@ class PropertyDetail extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
                                     data.bathrooms,
@@ -229,6 +202,14 @@ class PropertyDetail extends StatelessWidget {
                               ),
                               Text(data.bedrooms),
                             ],
+                          ),
+                          IconButton(
+                            onPressed: () => launchWhatsApp(),
+                            icon: FaIcon(
+                              color: Colors.green,
+                              FontAwesomeIcons.whatsapp,
+                              size: 30,
+                            ),
                           ),
                           IconButton(
                             onPressed: () {

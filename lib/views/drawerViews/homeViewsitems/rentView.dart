@@ -16,6 +16,7 @@ class RentView extends StatelessWidget {
   final SearchRentController searchRentController =
       Get.put(SearchRentController());
   TextEditingController textController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(body: Obx(() {

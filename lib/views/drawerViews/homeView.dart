@@ -8,6 +8,7 @@ import 'package:haider/views/drawerViews/homeViewsitems/accountSetttings.dart';
 
 import '../../controllers/draweController.dart';
 import '../choosescreen.dart';
+import '../info.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -21,9 +22,11 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   final PageViewController pageViewController = Get.put(PageViewController());
   final DraweController draweController = Get.put(DraweController());
   final box = GetStorage();
+
   @override
   void initState() {
     super.initState();
+
     _pageController = PageController(initialPage: _pageIndex.value);
     _tabController =
         TabController(length: 4, vsync: this, initialIndex: _pageIndex.value);
@@ -85,9 +88,6 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                       onTap: () {
                         print(index);
                         index == 1 ? Get.to(() => AccountSettings()) : null;
-                        // draweController.update();
-                        // pageViewController.pageViewIndex.value = 0;
-                        // Navigator.pop(context);
                       },
                     );
                   }),
@@ -141,13 +141,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
         actions: [
           IconButton(
               onPressed: () {
-                // Get.to(() => ExampleScreen());
-                // Get.updateLocale(const Locale('ar', 'EG'));
-                // Get.changeTheme(Get.isDarkMode
-                //     ? ThemeData.light(useMaterial3: true)
-                //     : ThemeData.dark(
-                //         useMaterial3: true,
-                //       ));
+                Get.to(() => Info());
               },
               icon: Icon(Icons.info)),
         ],

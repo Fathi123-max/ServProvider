@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:haider/utills/localzation.dart';
 import 'package:haider/views/choosescreen.dart';
-import 'package:haider/views/drawerScreen.dart';
+import 'package:haider/views/drawerViews/homeView.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -13,7 +13,7 @@ void main() async {
   await GetStorage.init();
 
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-    statusBarIconBrightness: Brightness.dark,
+    statusBarIconBrightness: Brightness.light,
 
     statusBarColor: Colors.white, // status bar color
   ));
@@ -38,8 +38,6 @@ class _MyAppState extends State<MyApp> {
     return GetMaterialApp(
       translations: Languages(),
       locale: const Locale('ar', 'EG'),
-      // fallbackLocale: const Locale('ar', 'EG'),
-      // onInit: () => AddPropertyController(),
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
@@ -47,7 +45,7 @@ class _MyAppState extends State<MyApp> {
         brightness: Brightness.light,
         useMaterial3: true,
       ),
-      home: box == null ? EnterInfo() : NavDrawerScreen(),
+      home: box == null ? EnterInfo() : Home(),
     );
   }
 }

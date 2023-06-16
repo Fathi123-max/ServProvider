@@ -2,25 +2,48 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:haider/controllers/rentAndRentOutController.dart';
 
+import '../../../../controllers/catogryconroller.dart';
 import '../../../../utills/customColors.dart';
 import '../../../propertyDetailScreen.dart';
 
 class catogrylist extends StatelessWidget {
   // const RentOutView({Key key}) : super(key: key);
-  final RentAndRentOutController rentOutController =
-      Get.put(RentAndRentOutController());
+  final catogryController catoController = Get.put(catogryController());
 
   TextEditingController textEditingController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: GridView.extent(
+        body: catoController.catogryList.length == 0
+            ? Center(
+                child: CircularProgressIndicator(),
+              )
+            : GridView.builder(
+                padding: EdgeInsets.all(10),
+                gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+                  maxCrossAxisExtent: 200,
+                  mainAxisSpacing: 10,
+                  crossAxisSpacing: 10,
+                ),
+                itemCount: catoController.catogryList.value.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return _buildServiceCategory(
+                      catoController.catogryList[index].catogryname!.tr,
+                      catoController.catogryList[index].catogryimage!);
+                },
+              ));
+  }
+}
+
+/** GridView.extent(
       maxCrossAxisExtent: 200,
       padding: EdgeInsets.all(10),
       mainAxisSpacing: 10,
       crossAxisSpacing: 10,
       children: [
+
+        
         _buildServiceCategory('Color Man'.tr, "assets/images/naqqash.jpeg"),
         _buildServiceCategory('Mecanical'.tr, "assets/images/mecancal.jpeg"),
         _buildServiceCategory('Ground Man'.tr, "assets/images/ballat.jpeg"),
@@ -40,9 +63,7 @@ class catogrylist extends StatelessWidget {
         _buildServiceCategory('other'.tr, "assets/images/logo.png"),
       ],
     ));
-  }
-}
-
+  */
 Widget _buildServiceCategory(String name, String image) {
   return InkWell(
     onTap: () {
@@ -67,7 +88,7 @@ Widget _buildServiceCategory(String name, String image) {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Image.asset(
+          Image.network(
             image,
             height: 100,
             width: 100,

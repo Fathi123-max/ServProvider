@@ -14,6 +14,15 @@ class AccountSettings extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        actions: [
+          IconButton(
+              onPressed: () => Get.back(),
+              icon: Icon(Icons.arrow_back_ios_new)),
+        ],
+        elevation: 0.0,
+      ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Get.to(() => EnterInfo());
@@ -21,10 +30,6 @@ class AccountSettings extends StatelessWidget {
         heroTag: "hellofrom 2dfdsjhfj",
         backgroundColor: CustomColors.orangeColor,
         child: Icon(Icons.edit_outlined),
-      ),
-      appBar: AppBar(
-        backgroundColor: Colors.white24,
-        elevation: 0.0,
       ),
       body: Obx(() {
         if (currentUserInfoController.isLoading.value) {

@@ -6,6 +6,8 @@ import 'package:haider/models/propertyModel.dart';
 import 'package:haider/models/userModel.dart';
 import 'package:haider/utills/customToast.dart';
 
+import '../models/catogrymodel.dart';
+
 class FirestoreService {
   // var currentUser = FirebaseAuth.instance.currentUser;
   // final AuthController controller = Get.find();
@@ -86,23 +88,37 @@ class FirestoreService {
     return response;
   }
 
+  Stream<List<catogrumodel>> getAllupdaetList() {
+    return FirebaseFirestore.instance.collection('catogry').snapshots().map(
+        (querySnapshot) => querySnapshot.docs
+            .map((doc) => catogrumodel.fromMap(doc.data()))
+            .toList());
+  }
+
+  Stream<List<CityModel>> getAllcityList() {
+    return FirebaseFirestore.instance.collection('city').snapshots().map(
+        (querySnapshot) => querySnapshot.docs
+            .map((doc) => CityModel.fromMap(doc.data()))
+            .toList());
+  }
+
 //
 
 //Get Cities Data
-  Future<List<CityModel>> getcitiesList() async {
-    List<CityModel> citiesList = [];
-    await FirebaseFirestore.instance
-        .collection('cities')
-        .get()
-        .then((QuerySnapshot querySnapshot) {
-      querySnapshot.docs.forEach((doc) {
-        print(doc['cityName']);
-        CityModel cityModel = CityModel(doc["cityName"]);
-        citiesList.add(cityModel);
-      });
-    });
-    return citiesList;
-  }
+  // Future<List<CityModel>> getcitiesList() async {
+  //   List<CityModel> citiesList = [];
+  //   await FirebaseFirestore.instance
+  //       .collection('cities')
+  //       .get()
+  //       .then((QuerySnapshot querySnapshot) {
+  //     querySnapshot.docs.forEach((doc) {
+  //       // print(doc['cityName']);
+  //       CityModel cityModel = CityModel(doc["cityName"]);
+  //       citiesList.add(cityModel);
+  //     });
+  //   });
+  //   return citiesList;
+  // }
 
   //Get Propert Of CurrentUser For Selling
 
@@ -114,7 +130,7 @@ class FirestoreService {
         .get()
         .then((QuerySnapshot querySnapshot) {
       querySnapshot.docs.forEach((doc) {
-        print("Document Id is ${doc.id}");
+        // print("Document Id is ${doc.id}");
         String docId = doc.id;
         PropertyModel propertyModel = PropertyModel.getFromServer(
           doc['time'],

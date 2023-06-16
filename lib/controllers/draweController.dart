@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:haider/models/drawerItems.dart';
-import 'package:haider/views/drawerViews/homeView.dart';
-import 'package:haider/views/drawerViews/homeViewsitems/accountSetttings.dart';
 
 class DraweController extends GetxController {
   var selectedDrawerIndex = 0.obs;
@@ -12,10 +10,5 @@ class DraweController extends GetxController {
     DrawerItem(title: 'Home'.tr, icon: Icons.home_outlined),
     // DrawerItem(title: 'Liked Property ', icon: Icons.favorite_outline),
     DrawerItem(title: 'Account Setting'.tr, icon: Icons.settings_outlined),
-  ].obs;
-  var drawerChildrens = [
-    Home(),
-    // LikedProperty()
-    AccountSettings()
   ].obs;
 }

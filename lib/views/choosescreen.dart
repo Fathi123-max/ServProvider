@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:haider/views/drawerScreen.dart';
+import 'package:haider/views/drawerViews/homeView.dart';
 
 import '../controllers/currentUserInfoController.dart';
 import '../utills/customColors.dart';
@@ -87,7 +87,7 @@ class _EnterInfoState extends State<EnterInfo> {
                     ),
                   ),
                   validator: (value) {
-                    if (value == '' || value == null) return 'Name is required';
+                    if (value == '' || value == null) ;
                     return null;
                   },
                 ),
@@ -126,8 +126,7 @@ class _EnterInfoState extends State<EnterInfo> {
                     ),
                   ),
                   validator: (value) {
-                    if (value == '' || value == null)
-                      return 'Phone is required';
+                    if (value == '' || value == null) ;
                     return null;
                   },
                 ),
@@ -139,7 +138,7 @@ class _EnterInfoState extends State<EnterInfo> {
                       ? () {
                           box.write('name', _nameController.text);
                           box.write('phone', _phoneController.text);
-                          Get.offAll(() => NavDrawerScreen());
+                          Get.offAll(() => Home());
                         }
                       : null,
                   child: Container(

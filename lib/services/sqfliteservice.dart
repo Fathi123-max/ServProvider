@@ -2,9 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:haider/models/likePropertyModel.dart';
 import 'package:haider/models/propertyModel.dart';
 import 'package:haider/utills/customToast.dart';
-import 'package:haider/views/likedPropertyScreen.dart';
-import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
+import 'package:sqflite/sqflite.dart';
 
 class SqfliteService {
   Future<Database> openDb() async {
@@ -105,7 +104,7 @@ class SqfliteService {
         }
       });
     });
-    CustomToast.showToast('${propertyList.length}');
+    // CustomToast.showToast('${propertyList.length}');
     return propertyList;
   }
 }
