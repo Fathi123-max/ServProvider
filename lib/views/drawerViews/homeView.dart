@@ -5,10 +5,11 @@ import 'package:get_storage/get_storage.dart';
 import 'package:haider/controllers/pageViewController.dart';
 import 'package:haider/utills/customColors.dart';
 import 'package:haider/views/drawerViews/homeViewsitems/accountSetttings.dart';
+import 'package:haider/views/info.dart';
 
 import '../../controllers/draweController.dart';
 import '../choosescreen.dart';
-import '../info.dart';
+import 'homeViewsitems/rentView.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -56,7 +57,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
               child: Column(
                 children: [
                   Image.asset(
-                    'assets/images/logo.png',
+                    'assets/images/logo.gif',
                     height: 200,
                   ),
                 ],
@@ -88,6 +89,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                       onTap: () {
                         print(index);
                         index == 1 ? Get.to(() => AccountSettings()) : null;
+                        index == 2 ? Get.to(() => Info()) : null;
                       },
                     );
                   }),
@@ -140,10 +142,14 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
         ),
         actions: [
           IconButton(
-              onPressed: () {
-                Get.to(() => Info());
-              },
-              icon: Icon(Icons.info)),
+            icon: Icon(Icons.search),
+            onPressed: () {
+              showSearch(
+                context: context,
+                delegate: PropertySearchDelegate(),
+              );
+            },
+          ),
         ],
       ),
       bottomNavigationBar: ConvexAppBar(

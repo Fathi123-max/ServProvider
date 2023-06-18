@@ -4,19 +4,16 @@ import 'package:haider/models/propertyModel.dart';
 import 'package:haider/services/firestoreService.dart';
 
 class RentAndRentOutController extends GetxController {
-  // final AuthController controller = Get.find();
   FirestoreService firestoreService = FirestoreService();
   var currentUserRentOutlist = <PropertyModel>[].obs;
-
-  var allRentList = <PropertyModel>[].obs;
-  var allcatList = [].obs;
+  RxList<PropertyModel> allRentList = <PropertyModel>[].obs;
+  RxList<PropertyModel> allcatList = <PropertyModel>[].obs;
   var isLoading = false.obs;
   var value = true.obs;
-/////////////////////////////////////////////////////
+
   final cityEditTextController = TextEditingController();
   final rangeTextFromController = TextEditingController();
   final rangeTextToTextController = TextEditingController();
-  //////////////////////////////////////////////////
 
   getRentOutProprtyOfCurrentUser() async {
     isLoading(true);
@@ -34,24 +31,25 @@ class RentAndRentOutController extends GetxController {
 
   getAllRentPropertyByCatogry(String search) async {
     isLoading(true);
-    var catogrybyname =
+    var catogryByName =
         await firestoreService.getAllRentListByCatogry(search: search);
-    allcatList.value = catogrybyname;
+    allcatList.value = catogryByName;
     isLoading(false);
   }
 
   @override
   void onInit() {
-    // TODO: implement onInit
     super.onInit();
     getRentOutProprtyOfCurrentUser();
     getAllRentProperty();
   }
-  // @override
-  // void refresh() {
-  //   // TODO: implement refresh
-  //   super.refresh();
-  //   getRentOutProprtyOfCurrentUser();
-  //   getAllRentProperty();
-  // }
+
+  @override
+  void onClose() {
+    // Dispose of the text editing controllers
+    cityEditTextController.dispose();
+    rangeTextFromController.dispose();
+    rangeTextToTextController.dispose();
+    super.onClose();
+  }
 }

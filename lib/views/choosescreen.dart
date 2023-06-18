@@ -39,7 +39,7 @@ class _EnterInfoState extends State<EnterInfo> {
                   width: 300,
                   decoration: BoxDecoration(
                     image: DecorationImage(
-                      image: AssetImage('assets/images/logo.png'),
+                      image: AssetImage('assets/images/logo.gif'),
                       fit: BoxFit.fill,
                     ),
                   ),
@@ -48,7 +48,7 @@ class _EnterInfoState extends State<EnterInfo> {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Text(
-                  "Enter your information",
+                  "ادخل بياناتك من فضلك",
                   style: TextStyle(
                       fontWeight: FontWeight.bold, color: Colors.grey),
                 ),
@@ -134,18 +134,55 @@ class _EnterInfoState extends State<EnterInfo> {
               Padding(
                 padding: const EdgeInsets.only(top: 8, left: 25, right: 25),
                 child: InkWell(
-                  onTap: _isButtonEnabled
-                      ? () {
-                          box.write('name', _nameController.text);
-                          box.write('phone', _phoneController.text);
-                          Get.offAll(() => Home());
-                        }
-                      : null,
+                  onTap: () {
+                    final String name = _nameController.text.trim();
+                    final String phone = _phoneController.text.trim();
+
+                    // if (name.isEmpty || phone.isEmpty) {
+                    //   Get.dialog(AlertDialog(
+                    //       icon: Icon(Icons.error),
+                    //       content: Row(
+                    //           mainAxisAlignment: MainAxisAlignment.center,
+                    //           children: [
+                    //             Text("ادخل بياناتك من فضلك"),
+                    //           ])));
+                    //   return;
+                    // }
+
+                    final bool isNameValid =
+                        RegExp(r'^[a-zA-Z\u0621-\u064A ]+$').hasMatch(name);
+                    final bool isPhoneValid =
+                        RegExp(r'^[0-9]+$').hasMatch(phone);
+
+                    if (!isNameValid) {
+                      Get.dialog(AlertDialog(
+                          icon: Icon(Icons.error),
+                          content: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text("يرجى إدخال اسم صالح"),
+                              ])));
+                      return;
+                    }
+
+                    if (!isPhoneValid) {
+                      Get.dialog(AlertDialog(
+                          icon: Icon(Icons.error),
+                          content: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text("يرجى إدخال رقم هاتف صالح"),
+                              ])));
+                      return;
+                    }
+
+                    box.write('name', name);
+                    box.write('phone', phone);
+                    Get.offAll(() => Home());
+                  },
                   child: Container(
                     decoration: BoxDecoration(
-                      color: _isButtonEnabled
-                          ? CustomColors.lioghtGrey
-                          : Colors.grey,
+                      color: CustomColors.lioghtGrey,
                       border: Border.all(color: CustomColors.lioghtGrey),
                       borderRadius: BorderRadius.all(Radius.circular(10)),
                     ),

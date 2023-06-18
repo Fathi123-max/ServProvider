@@ -103,25 +103,6 @@ class FirestoreService {
   }
 
 //
-
-//Get Cities Data
-  // Future<List<CityModel>> getcitiesList() async {
-  //   List<CityModel> citiesList = [];
-  //   await FirebaseFirestore.instance
-  //       .collection('cities')
-  //       .get()
-  //       .then((QuerySnapshot querySnapshot) {
-  //     querySnapshot.docs.forEach((doc) {
-  //       // print(doc['cityName']);
-  //       CityModel cityModel = CityModel(doc["cityName"]);
-  //       citiesList.add(cityModel);
-  //     });
-  //   });
-  //   return citiesList;
-  // }
-
-  //Get Propert Of CurrentUser For Selling
-
   Future<List<PropertyModel>> getCurrentUserPropertyForSelling() async {
     List<PropertyModel> propertyList = [];
     await FirebaseFirestore.instance
@@ -296,30 +277,6 @@ class FirestoreService {
     return propertyListbycat;
   }
 
-  // Future<UserModel> getUserInfo(String id) async {
-  //   //  dynamic currentUserId = FirebaseAuth.instance.currentUser!.uid;
-  //   //CustomToast.showToast(id);
-  //   UserModel newUserModel = UserModel();
-  //   await FirebaseFirestore.instance
-  //       .collection('users')
-  //       .get()
-  //       .then((QuerySnapshot querySnapshot) {
-  //     querySnapshot.docs.forEach((doc) {
-  //       UserModel userModel = UserModel();
-  //       if (doc['userId'] == id) {
-  //         userModel.currentUserId = doc['userId'];
-  //         userModel.firstName = doc['firstName'];
-  //         print('user name is ${userModel.firstName}');
-  //         userModel.lastName = doc['LastName'];
-  //         userModel.phoneNumber = doc['phoneNo'];
-
-  //         newUserModel = userModel;
-  //       }
-  //     });
-  //   });
-  //   return newUserModel;
-  // }
-
   Future<String> updateProperty(String docID, String updatedValue) async {
     CollectionReference collectionReference =
         FirebaseFirestore.instance.collection('property');
@@ -355,489 +312,561 @@ class FirestoreService {
     return response;
   }
 
-  Future<List<PropertyModel>> serachBuyList(
-      String cityname, String priceFrom, String priceTo) async {
+/**/ ////////////////////////////////////////////////////////////////////
+  Future<List<PropertyModel>> serachRentList(String cityname) async {
     List<PropertyModel> propertyList = [];
 
-    if (cityname != '' && priceFrom == '' && priceTo == '') {
-      //   CustomToast.showToast('controller.cityEditTextController.text');
-      await FirebaseFirestore.instance
-          .collection('property')
-          .orderBy('time', descending: true)
-          .get()
-          .then((QuerySnapshot querySnapshot) {
-        querySnapshot.docs.forEach((doc) {
-          PropertyModel propertyModel = PropertyModel.getFromServer(
-            doc['time'],
-            doc['propertyAction'],
-            doc.id,
-            doc['currentUserId'],
-            doc['propertyType'],
-            doc['propertyFor'],
-            doc['city'],
-            doc['area'],
-            doc['address'],
-            doc['size'],
-            doc['bedrooms'],
-            doc['bathrooms'],
-            doc['kitchen'],
-            doc['des'],
-            doc['price'],
-            doc['images'],
-          );
-          String city = doc['city'];
+    await FirebaseFirestore.instance
+        .collection('property')
+        .where('address', isGreaterThanOrEqualTo: cityname.toLowerCase())
+        .where('address', isLessThan: cityname.toLowerCase() + 'z')
+        .orderBy('address', descending: true)
+        .get()
+        .then((QuerySnapshot querySnapshot) {
+      querySnapshot.docs.forEach((doc) {
+        PropertyModel propertyModel = PropertyModel.getFromServer(
+          doc['time'],
+          doc['propertyAction'],
+          doc.id,
+          doc['currentUserId'],
+          doc['propertyType'],
+          doc['propertyFor'],
+          doc['city'],
+          doc['area'],
+          doc['address'],
+          doc['size'],
+          doc['bedrooms'],
+          doc['bathrooms'],
+          doc['kitchen'],
+          doc['des'],
+          doc['price'],
+          doc['images'],
+        );
 
-          propertyList.add(propertyModel);
-        });
+        propertyList.add(propertyModel);
       });
-    } else if (cityname != '' && priceFrom != '' && priceTo == '') {
-      await FirebaseFirestore.instance
-          .collection('property')
-          .orderBy('price', descending: true)
-          .get()
-          .then((QuerySnapshot querySnapshot) {
-        querySnapshot.docs.forEach((doc) {
-          PropertyModel propertyModel = PropertyModel.getFromServer(
-            doc['time'],
-            doc['propertyAction'],
-            doc.id,
-            doc['currentUserId'],
-            doc['propertyType'],
-            doc['propertyFor'],
-            doc['city'],
-            doc['area'],
-            doc['address'],
-            doc['size'],
-            doc['bedrooms'],
-            doc['bathrooms'],
-            doc['kitchen'],
-            doc['des'],
-            doc['price'],
-            doc['images'],
-          );
-          String city = doc['city'];
-          int price = int.parse(doc['price']);
-          if (doc['propertyFor'] == 'sale' &&
-              cityname.toLowerCase() == city.toLowerCase() &&
-              price >= int.parse(priceFrom)) {
-            propertyList.add(propertyModel);
-          }
-        });
-      });
-    } else if (cityname != '' && priceFrom == '' && priceTo != '') {
-      await FirebaseFirestore.instance
-          .collection('property')
-          .orderBy('price', descending: true)
-          .get()
-          .then((QuerySnapshot querySnapshot) {
-        querySnapshot.docs.forEach((doc) {
-          PropertyModel propertyModel = PropertyModel.getFromServer(
-            doc['time'],
-            doc['propertyAction'],
-            doc.id,
-            doc['currentUserId'],
-            doc['propertyType'],
-            doc['propertyFor'],
-            doc['city'],
-            doc['area'],
-            doc['address'],
-            doc['size'],
-            doc['bedrooms'],
-            doc['bathrooms'],
-            doc['kitchen'],
-            doc['des'],
-            doc['price'],
-            doc['images'],
-          );
-          String city = doc['city'];
-          int price = int.parse(doc['price']);
-          if (doc['propertyFor'] == 'sale' &&
-              cityname.toLowerCase() == city.toLowerCase() &&
-              price <= int.parse(priceTo)) {
-            propertyList.add(propertyModel);
-          }
-        });
-      });
-    } else if (cityname != '' && priceFrom != '' && priceTo != '') {
-      await FirebaseFirestore.instance
-          .collection('property')
-          .orderBy('price', descending: true)
-          .get()
-          .then((QuerySnapshot querySnapshot) {
-        querySnapshot.docs.forEach((doc) {
-          PropertyModel propertyModel = PropertyModel.getFromServer(
-            doc['time'],
-            doc['propertyAction'],
-            doc.id,
-            doc['currentUserId'],
-            doc['propertyType'],
-            doc['propertyFor'],
-            doc['city'],
-            doc['area'],
-            doc['address'],
-            doc['size'],
-            doc['bedrooms'],
-            doc['bathrooms'],
-            doc['kitchen'],
-            doc['des'],
-            doc['price'],
-            doc['images'],
-          );
-          String city = doc['city'];
-          int price = int.parse(doc['price']);
-          if (doc['propertyFor'] == 'sale' &&
-              cityname.toLowerCase() == city.toLowerCase() &&
-              price >= int.parse(priceFrom) &&
-              price <= int.parse(priceTo)) {
-            propertyList.add(propertyModel);
-          }
-        });
-      });
-    } else if (cityname == '' && priceFrom != '' && priceTo == '') {
-      await FirebaseFirestore.instance
-          .collection('property')
-          .orderBy('price', descending: true)
-          .get()
-          .then((QuerySnapshot querySnapshot) {
-        querySnapshot.docs.forEach((doc) {
-          PropertyModel propertyModel = PropertyModel.getFromServer(
-            doc['time'],
-            doc['propertyAction'],
-            doc.id,
-            doc['currentUserId'],
-            doc['propertyType'],
-            doc['propertyFor'],
-            doc['city'],
-            doc['area'],
-            doc['address'],
-            doc['size'],
-            doc['bedrooms'],
-            doc['bathrooms'],
-            doc['kitchen'],
-            doc['des'],
-            doc['price'],
-            doc['images'],
-          );
-          String city = doc['city'];
-          int price = int.parse(doc['price']);
-          if (doc['propertyFor'] == 'sale' && price >= int.parse(priceFrom)) {
-            propertyList.add(propertyModel);
-          }
-        });
-      });
-    } else if (cityname == '' && priceFrom == '' && priceTo != '') {
-      await FirebaseFirestore.instance
-          .collection('property')
-          .orderBy('price', descending: true)
-          .get()
-          .then((QuerySnapshot querySnapshot) {
-        querySnapshot.docs.forEach((doc) {
-          PropertyModel propertyModel = PropertyModel.getFromServer(
-            doc['time'],
-            doc['propertyAction'],
-            doc.id,
-            doc['currentUserId'],
-            doc['propertyType'],
-            doc['propertyFor'],
-            doc['city'],
-            doc['area'],
-            doc['address'],
-            doc['size'],
-            doc['bedrooms'],
-            doc['bathrooms'],
-            doc['kitchen'],
-            doc['des'],
-            doc['price'],
-            doc['images'],
-          );
-
-          int price = int.parse(doc['price']);
-          if (doc['propertyFor'] == 'sale' && price <= int.parse(priceTo)) {
-            propertyList.add(propertyModel);
-          }
-        });
-      });
-    } else if (cityname == '' && priceFrom != '' && priceTo != '') {
-      await FirebaseFirestore.instance
-          .collection('property')
-          .orderBy('price', descending: true)
-          .get()
-          .then((QuerySnapshot querySnapshot) {
-        querySnapshot.docs.forEach((doc) {
-          PropertyModel propertyModel = PropertyModel.getFromServer(
-            doc['time'],
-            doc['propertyAction'],
-            doc.id,
-            doc['currentUserId'],
-            doc['propertyType'],
-            doc['propertyFor'],
-            doc['city'],
-            doc['area'],
-            doc['address'],
-            doc['size'],
-            doc['bedrooms'],
-            doc['bathrooms'],
-            doc['kitchen'],
-            doc['des'],
-            doc['price'],
-            doc['images'],
-          );
-          String city = doc['city'];
-          int price = int.parse(doc['price']);
-          if (doc['propertyFor'] == 'sale' &&
-              price >= int.parse(priceFrom) &&
-              price <= int.parse(priceTo)) {
-            propertyList.add(propertyModel);
-          }
-        });
-      });
-    }
-
-    return propertyList;
-  }
-
-////////////////////////////////////////////////////////////////////////
-  Future<List<PropertyModel>> serachRentList(
-      String cityname, String priceFrom, String priceTo) async {
-    List<PropertyModel> propertyList = [];
-
-    if (cityname != '' && priceFrom == '' && priceTo == '') {
-      //   CustomToast.showToast('controller.cityEditTextController.text');
-      await FirebaseFirestore.instance
-          .collection('property')
-          .orderBy('time', descending: true)
-          .get()
-          .then((QuerySnapshot querySnapshot) {
-        querySnapshot.docs.forEach((doc) {
-          PropertyModel propertyModel = PropertyModel.getFromServer(
-            doc['time'],
-            doc['propertyAction'],
-            doc.id,
-            doc['currentUserId'],
-            doc['propertyType'],
-            doc['propertyFor'],
-            doc['city'],
-            doc['area'],
-            doc['address'],
-            doc['size'],
-            doc['bedrooms'],
-            doc['bathrooms'],
-            doc['kitchen'],
-            doc['des'],
-            doc['price'],
-            doc['images'],
-          );
-          String city = doc['city'];
-
-          if (doc['propertyFor'] == 'rent' &&
-              cityname.toLowerCase() == city.toLowerCase()) {
-            propertyList.add(propertyModel);
-          }
-        });
-      });
-    } else if (cityname != '' && priceFrom != '' && priceTo == '') {
-      await FirebaseFirestore.instance
-          .collection('property')
-          .orderBy('price', descending: true)
-          .get()
-          .then((QuerySnapshot querySnapshot) {
-        querySnapshot.docs.forEach((doc) {
-          PropertyModel propertyModel = PropertyModel.getFromServer(
-            doc['time'],
-            doc['propertyAction'],
-            doc.id,
-            doc['currentUserId'],
-            doc['propertyType'],
-            doc['propertyFor'],
-            doc['city'],
-            doc['area'],
-            doc['address'],
-            doc['size'],
-            doc['bedrooms'],
-            doc['bathrooms'],
-            doc['kitchen'],
-            doc['des'],
-            doc['price'],
-            doc['images'],
-          );
-          String city = doc['city'];
-          int price = int.parse(doc['price']);
-          if (doc['propertyFor'] == 'rent' &&
-              cityname.toLowerCase() == city.toLowerCase() &&
-              price >= int.parse(priceFrom)) {
-            propertyList.add(propertyModel);
-          }
-        });
-      });
-    } else if (cityname != '' && priceFrom == '' && priceTo != '') {
-      await FirebaseFirestore.instance
-          .collection('property')
-          .orderBy('price', descending: true)
-          .get()
-          .then((QuerySnapshot querySnapshot) {
-        querySnapshot.docs.forEach((doc) {
-          PropertyModel propertyModel = PropertyModel.getFromServer(
-            doc['time'],
-            doc['propertyAction'],
-            doc.id,
-            doc['currentUserId'],
-            doc['propertyType'],
-            doc['propertyFor'],
-            doc['city'],
-            doc['area'],
-            doc['address'],
-            doc['size'],
-            doc['bedrooms'],
-            doc['bathrooms'],
-            doc['kitchen'],
-            doc['des'],
-            doc['price'],
-            doc['images'],
-          );
-          String city = doc['city'];
-          int price = int.parse(doc['price']);
-          if (doc['propertyFor'] == 'rent' &&
-              cityname.toLowerCase() == city.toLowerCase() &&
-              price <= int.parse(priceTo)) {
-            propertyList.add(propertyModel);
-          }
-        });
-      });
-    } else if (cityname != '' && priceFrom != '' && priceTo != '') {
-      await FirebaseFirestore.instance
-          .collection('property')
-          .orderBy('price', descending: true)
-          .get()
-          .then((QuerySnapshot querySnapshot) {
-        querySnapshot.docs.forEach((doc) {
-          PropertyModel propertyModel = PropertyModel.getFromServer(
-            doc['time'],
-            doc['propertyAction'],
-            doc.id,
-            doc['currentUserId'],
-            doc['propertyType'],
-            doc['propertyFor'],
-            doc['city'],
-            doc['area'],
-            doc['address'],
-            doc['size'],
-            doc['bedrooms'],
-            doc['bathrooms'],
-            doc['kitchen'],
-            doc['des'],
-            doc['price'],
-            doc['images'],
-          );
-          String city = doc['city'];
-          int price = int.parse(doc['price']);
-          if (doc['propertyFor'] == 'rent' &&
-              cityname.toLowerCase() == city.toLowerCase() &&
-              price >= int.parse(priceFrom) &&
-              price <= int.parse(priceTo)) {
-            propertyList.add(propertyModel);
-          }
-        });
-      });
-    } else if (cityname == '' && priceFrom != '' && priceTo == '') {
-      await FirebaseFirestore.instance
-          .collection('property')
-          .orderBy('price', descending: true)
-          .get()
-          .then((QuerySnapshot querySnapshot) {
-        querySnapshot.docs.forEach((doc) {
-          PropertyModel propertyModel = PropertyModel.getFromServer(
-            doc['time'],
-            doc['propertyAction'],
-            doc.id,
-            doc['currentUserId'],
-            doc['propertyType'],
-            doc['propertyFor'],
-            doc['city'],
-            doc['area'],
-            doc['address'],
-            doc['size'],
-            doc['bedrooms'],
-            doc['bathrooms'],
-            doc['kitchen'],
-            doc['des'],
-            doc['price'],
-            doc['images'],
-          );
-          String city = doc['city'];
-          int price = int.parse(doc['price']);
-          if (doc['propertyFor'] == 'rent' && price >= int.parse(priceFrom)) {
-            propertyList.add(propertyModel);
-          }
-        });
-      });
-    } else if (cityname == '' && priceFrom == '' && priceTo != '') {
-      await FirebaseFirestore.instance
-          .collection('property')
-          .orderBy('price', descending: true)
-          .get()
-          .then((QuerySnapshot querySnapshot) {
-        querySnapshot.docs.forEach((doc) {
-          PropertyModel propertyModel = PropertyModel.getFromServer(
-            doc['time'],
-            doc['propertyAction'],
-            doc.id,
-            doc['currentUserId'],
-            doc['propertyType'],
-            doc['propertyFor'],
-            doc['city'],
-            doc['area'],
-            doc['address'],
-            doc['size'],
-            doc['bedrooms'],
-            doc['bathrooms'],
-            doc['kitchen'],
-            doc['des'],
-            doc['price'],
-            doc['images'],
-          );
-
-          int price = int.parse(doc['price']);
-          if (doc['propertyFor'] == 'rent' && price <= int.parse(priceTo)) {
-            propertyList.add(propertyModel);
-          }
-        });
-      });
-    } else if (cityname == '' && priceFrom != '' && priceTo != '') {
-      await FirebaseFirestore.instance
-          .collection('property')
-          .orderBy('price', descending: true)
-          .get()
-          .then((QuerySnapshot querySnapshot) {
-        querySnapshot.docs.forEach((doc) {
-          PropertyModel propertyModel = PropertyModel.getFromServer(
-            doc['time'],
-            doc['propertyAction'],
-            doc.id,
-            doc['currentUserId'],
-            doc['propertyType'],
-            doc['propertyFor'],
-            doc['city'],
-            doc['area'],
-            doc['address'],
-            doc['size'],
-            doc['bedrooms'],
-            doc['bathrooms'],
-            doc['kitchen'],
-            doc['des'],
-            doc['price'],
-            doc['images'],
-          );
-          String city = doc['city'];
-          int price = int.parse(doc['price']);
-          if (doc['propertyFor'] == 'rent' &&
-              price >= int.parse(priceFrom) &&
-              price <= int.parse(priceTo)) {
-            propertyList.add(propertyModel);
-          }
-        });
-      });
-    }
+    });
 
     return propertyList;
   }
 }
+
+
+//Get Cities Data
+  // Future<List<CityModel>> getcitiesList() async {
+  //   List<CityModel> citiesList = [];
+  //   await FirebaseFirestore.instance
+  //       .collection('cities')
+  //       .get()
+  //       .then((QuerySnapshot querySnapshot) {
+  //     querySnapshot.docs.forEach((doc) {
+  //       // print(doc['cityName']);
+  //       CityModel cityModel = CityModel(doc["cityName"]);
+  //       citiesList.add(cityModel);
+  //     });
+  //   });
+  //   return citiesList;
+  // }
+
+  //Get Propert Of CurrentUser For Selling
+
+    // if (cityname != '' && priceFrom == '' && priceTo == '') {
+    //   //   CustomToast.showToast('controller.cityEditTextController.text');
+    //   await FirebaseFirestore.instance
+    //       .collection('property')
+    //       .orderBy('time', descending: true)
+    //       .get()
+    //       .then((QuerySnapshot querySnapshot) {
+    //     querySnapshot.docs.forEach((doc) {
+    //       PropertyModel propertyModel = PropertyModel.getFromServer(
+    //         doc['time'],
+    //         doc['propertyAction'],
+    //         doc.id,
+    //         doc['currentUserId'],
+    //         doc['propertyType'],
+    //         doc['propertyFor'],
+    //         doc['city'],
+    //         doc['area'],
+    //         doc['address'],
+    //         doc['size'],
+    //         doc['bedrooms'],
+    //         doc['bathrooms'],
+    //         doc['kitchen'],
+    //         doc['des'],
+    //         doc['price'],
+    //         doc['images'],
+    //       );
+    //       String city = doc['city'];
+
+    //       if (doc['propertyFor'] == 'rent' &&
+    //           cityname.toLowerCase() == city.toLowerCase()) {
+    //         propertyList.add(propertyModel);
+    //       }
+    //     });
+    //   });
+    // } else if (cityname != '' && priceFrom != '' && priceTo == '') {
+    //   await FirebaseFirestore.instance
+    //       .collection('property')
+    //       .orderBy('price', descending: true)
+    //       .get()
+    //       .then((QuerySnapshot querySnapshot) {
+    //     querySnapshot.docs.forEach((doc) {
+    //       PropertyModel propertyModel = PropertyModel.getFromServer(
+    //         doc['time'],
+    //         doc['propertyAction'],
+    //         doc.id,
+    //         doc['currentUserId'],
+    //         doc['propertyType'],
+    //         doc['propertyFor'],
+    //         doc['city'],
+    //         doc['area'],
+    //         doc['address'],
+    //         doc['size'],
+    //         doc['bedrooms'],
+    //         doc['bathrooms'],
+    //         doc['kitchen'],
+    //         doc['des'],
+    //         doc['price'],
+    //         doc['images'],
+    //       );
+    //       String city = doc['city'];
+    //       int price = int.parse(doc['price']);
+    //       if (doc['propertyFor'] == 'rent' &&
+    //           cityname.toLowerCase() == city.toLowerCase() &&
+    //           price >= int.parse(priceFrom)) {
+    //         propertyList.add(propertyModel);
+    //       }
+    //     });
+    //   });
+    // } else if (cityname != '' && priceFrom == '' && priceTo != '') {
+    //   await FirebaseFirestore.instance
+    //       .collection('property')
+    //       .orderBy('price', descending: true)
+    //       .get()
+    //       .then((QuerySnapshot querySnapshot) {
+    //     querySnapshot.docs.forEach((doc) {
+    //       PropertyModel propertyModel = PropertyModel.getFromServer(
+    //         doc['time'],
+    //         doc['propertyAction'],
+    //         doc.id,
+    //         doc['currentUserId'],
+    //         doc['propertyType'],
+    //         doc['propertyFor'],
+    //         doc['city'],
+    //         doc['area'],
+    //         doc['address'],
+    //         doc['size'],
+    //         doc['bedrooms'],
+    //         doc['bathrooms'],
+    //         doc['kitchen'],
+    //         doc['des'],
+    //         doc['price'],
+    //         doc['images'],
+    //       );
+    //       String city = doc['city'];
+    //       int price = int.parse(doc['price']);
+    //       if (doc['propertyFor'] == 'rent' &&
+    //           cityname.toLowerCase() == city.toLowerCase() &&
+    //           price <= int.parse(priceTo)) {
+    //         propertyList.add(propertyModel);
+    //       }
+    //     });
+    //   });
+    // } else if (cityname != '' && priceFrom != '' && priceTo != '') {
+    //   await FirebaseFirestore.instance
+    //       .collection('property')
+    //       .where("address", isLessThan: cityname.toLowerCase())
+    //       .orderBy('address', descending: true)
+    //       .get()
+    //       .then((QuerySnapshot querySnapshot) {
+    //     querySnapshot.docs.forEach((doc) {
+    //       PropertyModel propertyModel = PropertyModel.getFromServer(
+    //         doc['time'],
+    //         doc['propertyAction'],
+    //         doc.id,
+    //         doc['currentUserId'],
+    //         doc['propertyType'],
+    //         doc['propertyFor'],
+    //         doc['city'],
+    //         doc['area'],
+    //         doc['address'],
+    //         doc['size'],
+    //         doc['bedrooms'],
+    //         doc['bathrooms'],
+    //         doc['kitchen'],
+    //         doc['des'],
+    //         doc['price'],
+    //         doc['images'],
+    //       );
+    //       propertyList.add(propertyModel);
+    //     });
+    //   });
+    // } else if (cityname == '' && priceFrom != '' && priceTo == '') {
+    //   await FirebaseFirestore.instance
+    //       .collection('property')
+    //       .orderBy('price', descending: true)
+    //       .get()
+    //       .then((QuerySnapshot querySnapshot) {
+    //     querySnapshot.docs.forEach((doc) {
+    //       PropertyModel propertyModel = PropertyModel.getFromServer(
+    //         doc['time'],
+    //         doc['propertyAction'],
+    //         doc.id,
+    //         doc['currentUserId'],
+    //         doc['propertyType'],
+    //         doc['propertyFor'],
+    //         doc['city'],
+    //         doc['area'],
+    //         doc['address'],
+    //         doc['size'],
+    //         doc['bedrooms'],
+    //         doc['bathrooms'],
+    //         doc['kitchen'],
+    //         doc['des'],
+    //         doc['price'],
+    //         doc['images'],
+    //       );
+    //       String city = doc['city'];
+    //       int price = int.parse(doc['price']);
+    //       if (doc['propertyFor'] == 'rent' && price >= int.parse(priceFrom)) {
+    //         propertyList.add(propertyModel);
+    //       }
+    //     });
+    //   });
+    // } else if (cityname == '' && priceFrom == '' && priceTo != '') {
+    //   await FirebaseFirestore.instance
+    //       .collection('property')
+    //       .orderBy('price', descending: true)
+    //       .get()
+    //       .then((QuerySnapshot querySnapshot) {
+    //     querySnapshot.docs.forEach((doc) {
+    //       PropertyModel propertyModel = PropertyModel.getFromServer(
+    //         doc['time'],
+    //         doc['propertyAction'],
+    //         doc.id,
+    //         doc['currentUserId'],
+    //         doc['propertyType'],
+    //         doc['propertyFor'],
+    //         doc['city'],
+    //         doc['area'],
+    //         doc['address'],
+    //         doc['size'],
+    //         doc['bedrooms'],
+    //         doc['bathrooms'],
+    //         doc['kitchen'],
+    //         doc['des'],
+    //         doc['price'],
+    //         doc['images'],
+    //       );
+
+    //       int price = int.parse(doc['price']);
+    //       if (doc['propertyFor'] == 'rent' && price <= int.parse(priceTo)) {
+    //         propertyList.add(propertyModel);
+    //       }
+    //     });
+    //   });
+    // } else if (cityname == '' && priceFrom != '' && priceTo != '') {
+    //   await FirebaseFirestore.instance
+    //       .collection('property')
+    //       .orderBy('price', descending: true)
+    //       .get()
+    //       .then((QuerySnapshot querySnapshot) {
+    //     querySnapshot.docs.forEach((doc) {
+    //       PropertyModel propertyModel = PropertyModel.getFromServer(
+    //         doc['time'],
+    //         doc['propertyAction'],
+    //         doc.id,
+    //         doc['currentUserId'],
+    //         doc['propertyType'],
+    //         doc['propertyFor'],
+    //         doc['city'],
+    //         doc['area'],
+    //         doc['address'],
+    //         doc['size'],
+    //         doc['bedrooms'],
+    //         doc['bathrooms'],
+    //         doc['kitchen'],
+    //         doc['des'],
+    //         doc['price'],
+    //         doc['images'],
+    //       );
+    //       String city = doc['city'];
+    //       int price = int.parse(doc['price']);
+    //       if (doc['propertyFor'] == 'rent' &&
+    //           price >= int.parse(priceFrom) &&
+    //           price <= int.parse(priceTo)) {
+    //         propertyList.add(propertyModel);
+    //       }
+    //     });
+    //   });
+    // }
+
+
+/**
+//   Future<List<PropertyModel>> serachBuyList(
+//       String cityname, String priceFrom, String priceTo) async {
+//     List<PropertyModel> propertyList = [];
+
+//     if (cityname != '' && priceFrom == '' && priceTo == '') {
+//       //   CustomToast.showToast('controller.cityEditTextController.text');
+//       await FirebaseFirestore.instance
+//           .collection('property')
+//           .orderBy('time', descending: true)
+//           .get()
+//           .then((QuerySnapshot querySnapshot) {
+//         querySnapshot.docs.forEach((doc) {
+//           PropertyModel propertyModel = PropertyModel.getFromServer(
+//             doc['time'],
+//             doc['propertyAction'],
+//             doc.id,
+//             doc['currentUserId'],
+//             doc['propertyType'],
+//             doc['propertyFor'],
+//             doc['city'],
+//             doc['area'],
+//             doc['address'],
+//             doc['size'],
+//             doc['bedrooms'],
+//             doc['bathrooms'],
+//             doc['kitchen'],
+//             doc['des'],
+//             doc['price'],
+//             doc['images'],
+//           );
+//           String city = doc['city'];
+
+//           propertyList.add(propertyModel);
+//         });
+//       });
+//     } else if (cityname != '' && priceFrom != '' && priceTo == '') {
+//       await FirebaseFirestore.instance
+//           .collection('property')
+//           .orderBy('price', descending: true)
+//           .get()
+//           .then((QuerySnapshot querySnapshot) {
+//         querySnapshot.docs.forEach((doc) {
+//           PropertyModel propertyModel = PropertyModel.getFromServer(
+//             doc['time'],
+//             doc['propertyAction'],
+//             doc.id,
+//             doc['currentUserId'],
+//             doc['propertyType'],
+//             doc['propertyFor'],
+//             doc['city'],
+//             doc['area'],
+//             doc['address'],
+//             doc['size'],
+//             doc['bedrooms'],
+//             doc['bathrooms'],
+//             doc['kitchen'],
+//             doc['des'],
+//             doc['price'],
+//             doc['images'],
+//           );
+//           String city = doc['city'];
+//           int price = int.parse(doc['price']);
+//           if (doc['propertyFor'] == 'sale' &&
+//               cityname.toLowerCase() == city.toLowerCase() &&
+//               price >= int.parse(priceFrom)) {
+//             propertyList.add(propertyModel);
+//           }
+//         });
+//       });
+//     } else if (cityname != '' && priceFrom == '' && priceTo != '') {
+//       await FirebaseFirestore.instance
+//           .collection('property')
+//           .orderBy('price', descending: true)
+//           .get()
+//           .then((QuerySnapshot querySnapshot) {
+//         querySnapshot.docs.forEach((doc) {
+//           PropertyModel propertyModel = PropertyModel.getFromServer(
+//             doc['time'],
+//             doc['propertyAction'],
+//             doc.id,
+//             doc['currentUserId'],
+//             doc['propertyType'],
+//             doc['propertyFor'],
+//             doc['city'],
+//             doc['area'],
+//             doc['address'],
+//             doc['size'],
+//             doc['bedrooms'],
+//             doc['bathrooms'],
+//             doc['kitchen'],
+//             doc['des'],
+//             doc['price'],
+//             doc['images'],
+//           );
+//           String city = doc['city'];
+//           int price = int.parse(doc['price']);
+//           if (doc['propertyFor'] == 'sale' &&
+//               cityname.toLowerCase() == city.toLowerCase() &&
+//               price <= int.parse(priceTo)) {
+//             propertyList.add(propertyModel);
+//           }
+//         });
+//       });
+//     } else if (cityname != '' && priceFrom != '' && priceTo != '') {
+//       await FirebaseFirestore.instance
+//           .collection('property')
+//           .orderBy('price', descending: true)
+//           .get()
+//           .then((QuerySnapshot querySnapshot) {
+//         querySnapshot.docs.forEach((doc) {
+//           PropertyModel propertyModel = PropertyModel.getFromServer(
+//             doc['time'],
+//             doc['propertyAction'],
+//             doc.id,
+//             doc['currentUserId'],
+//             doc['propertyType'],
+//             doc['propertyFor'],
+//             doc['city'],
+//             doc['area'],
+//             doc['address'],
+//             doc['size'],
+//             doc['bedrooms'],
+//             doc['bathrooms'],
+//             doc['kitchen'],
+//             doc['des'],
+//             doc['price'],
+//             doc['images'],
+//           );
+//           String city = doc['city'];
+//           int price = int.parse(doc['price']);
+//           if (doc['propertyFor'] == 'sale' &&
+//               cityname.toLowerCase() == city.toLowerCase() &&
+//               price >= int.parse(priceFrom) &&
+//               price <= int.parse(priceTo)) {
+//             propertyList.add(propertyModel);
+//           }
+//         });
+//       });
+//     } else if (cityname == '' && priceFrom != '' && priceTo == '') {
+//       await FirebaseFirestore.instance
+//           .collection('property')
+//           .orderBy('price', descending: true)
+//           .get()
+//           .then((QuerySnapshot querySnapshot) {
+//         querySnapshot.docs.forEach((doc) {
+//           PropertyModel propertyModel = PropertyModel.getFromServer(
+//             doc['time'],
+//             doc['propertyAction'],
+//             doc.id,
+//             doc['currentUserId'],
+//             doc['propertyType'],
+//             doc['propertyFor'],
+//             doc['city'],
+//             doc['area'],
+//             doc['address'],
+//             doc['size'],
+//             doc['bedrooms'],
+//             doc['bathrooms'],
+//             doc['kitchen'],
+//             doc['des'],
+//             doc['price'],
+//             doc['images'],
+//           );
+//           String city = doc['city'];
+//           int price = int.parse(doc['price']);
+//           if (doc['propertyFor'] == 'sale' && price >= int.parse(priceFrom)) {
+//             propertyList.add(propertyModel);
+//           }
+//         });
+//       });
+//     } else if (cityname == '' && priceFrom == '' && priceTo != '') {
+//       await FirebaseFirestore.instance
+//           .collection('property')
+//           .orderBy('price', descending: true)
+//           .get()
+//           .then((QuerySnapshot querySnapshot) {
+//         querySnapshot.docs.forEach((doc) {
+//           PropertyModel propertyModel = PropertyModel.getFromServer(
+//             doc['time'],
+//             doc['propertyAction'],
+//             doc.id,
+//             doc['currentUserId'],
+//             doc['propertyType'],
+//             doc['propertyFor'],
+//             doc['city'],
+//             doc['area'],
+//             doc['address'],
+//             doc['size'],
+//             doc['bedrooms'],
+//             doc['bathrooms'],
+//             doc['kitchen'],
+//             doc['des'],
+//             doc['price'],
+//             doc['images'],
+//           );
+
+//           int price = int.parse(doc['price']);
+//           if (doc['propertyFor'] == 'sale' && price <= int.parse(priceTo)) {
+//             propertyList.add(propertyModel);
+//           }
+//         });
+//       });
+//     } else if (cityname == '' && priceFrom != '' && priceTo != '') {
+//       await FirebaseFirestore.instance
+//           .collection('property')
+//           .orderBy('price', descending: true)
+//           .get()
+//           .then((QuerySnapshot querySnapshot) {
+//         querySnapshot.docs.forEach((doc) {
+//           PropertyModel propertyModel = PropertyModel.getFromServer(
+//             doc['time'],
+//             doc['propertyAction'],
+//             doc.id,
+//             doc['currentUserId'],
+//             doc['propertyType'],
+//             doc['propertyFor'],
+//             doc['city'],
+//             doc['area'],
+//             doc['address'],
+//             doc['size'],
+//             doc['bedrooms'],
+//             doc['bathrooms'],
+//             doc['kitchen'],
+//             doc['des'],
+//             doc['price'],
+//             doc['images'],
+//           );
+//           String city = doc['city'];
+//           int price = int.parse(doc['price']);
+//           if (doc['propertyFor'] == 'sale' &&
+//               price >= int.parse(priceFrom) &&
+//               price <= int.parse(priceTo)) {
+//             propertyList.add(propertyModel);
+//           }
+//         });
+//       });
+//     }
+
+//     return propertyList;
+//   }
+
+// //// */
+
+
+  // Future<UserModel> getUserInfo(String id) async {
+  //   //  dynamic currentUserId = FirebaseAuth.instance.currentUser!.uid;
+  //   //CustomToast.showToast(id);
+  //   UserModel newUserModel = UserModel();
+  //   await FirebaseFirestore.instance
+  //       .collection('users')
+  //       .get()
+  //       .then((QuerySnapshot querySnapshot) {
+  //     querySnapshot.docs.forEach((doc) {
+  //       UserModel userModel = UserModel();
+  //       if (doc['userId'] == id) {
+  //         userModel.currentUserId = doc['userId'];
+  //         userModel.firstName = doc['firstName'];
+  //         print('user name is ${userModel.firstName}');
+  //         userModel.lastName = doc['LastName'];
+  //         userModel.phoneNumber = doc['phoneNo'];
+
+  //         newUserModel = userModel;
+  //       }
+  //     });
+  //   });
+  //   return newUserModel;
+  // }

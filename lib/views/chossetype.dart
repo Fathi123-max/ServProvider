@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:haider/views/drawerViews/homeView.dart';
 
 import '../utills/customColors.dart';
 
@@ -17,13 +18,13 @@ class Choosetype extends GetView {
                 width: 300,
                 decoration: BoxDecoration(
                     image: DecorationImage(
-                        image: AssetImage('assets/images/logo.png'),
+                        image: AssetImage('assets/images/logo.gif'),
                         fit: BoxFit.fill))),
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Text(
-              "Enter your information ",
+              " شكرا لك تمت اضافه الخدمه بنجاج يمكنك الان الذهاب للصفحه الرئيسيه لتفقد خدمتك",
               style: TextStyle(fontWeight: FontWeight.bold, color: Colors.grey),
             ),
           ),
@@ -31,7 +32,7 @@ class Choosetype extends GetView {
             padding: const EdgeInsets.only(top: 8, left: 25, right: 25),
             child: InkWell(
               onTap: () {
-                // Get.to(() => );
+                Get.offAll(() => Home());
               },
               child: Container(
                   decoration: BoxDecoration(

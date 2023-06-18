@@ -31,7 +31,6 @@ class PropertyDetail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // sqfliliteController.getLIkiedOnly(data.docId);
     return Scaffold(
         appBar: AppBar(
           automaticallyImplyLeading: false,

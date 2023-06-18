@@ -21,7 +21,7 @@ class RentOutView extends StatelessWidget {
         return rentOutController.currentUserRentOutlist.value.length == 0
             ? Center(
                 child: Text(
-                  "No Data Found",
+                  "لم تنشأ خدمات بعد",
                   style: TextStyle(
                       fontWeight: FontWeight.bold,
                       color: CustomColors.orangeColor),

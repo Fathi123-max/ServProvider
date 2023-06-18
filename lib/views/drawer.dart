@@ -24,7 +24,7 @@ class drawerwidget extends StatelessWidget {
             child: Column(
               children: [
                 Image.asset(
-                  'assets/images/logo.png',
+                  'assets/images/logo.gif',
                   height: 200,
                 ),
               ],

@@ -60,7 +60,7 @@ class catogrylist extends StatelessWidget {
         _buildServiceCategory('Nurse'.tr, "assets/images/nurs.jpeg"),
         _buildServiceCategory(
             'Baby setter'.tr, "assets/images/babykeeper.jpeg"),
-        _buildServiceCategory('other'.tr, "assets/images/logo.png"),
+        _buildServiceCategory('other'.tr, "assets/images/logo.gif"),
       ],
     ));
   */

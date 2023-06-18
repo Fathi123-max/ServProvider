@@ -8,7 +8,7 @@ import 'package:haider/controllers/getSellAndBuyPropertController.dart';
 import 'package:haider/controllers/rentAndRentOutController.dart';
 import 'package:haider/utills/customColors.dart';
 import 'package:haider/utills/customToast.dart';
-import 'package:haider/views/drawerViews/homeView.dart';
+import 'package:haider/views/chossetype.dart';
 import 'package:multi_image_picker/multi_image_picker.dart';
 
 import '../controllers/citycontroller.dart';
@@ -411,7 +411,9 @@ class AddDataScreen extends StatelessWidget {
                               controller.desEditTextController.clear();
                               controller.priceEditTextController.clear();
                               controller.images.value = [];
-                              Get.offAll(() => Home());
+// Set the value of pageViewIndex to the index of the page that you want to show
+
+                              Get.offAll(() => Choosetype());
                             } else {
                               controller.showLoadingBar(false);
                               Get.showSnackbar(GetSnackBar(
@@ -427,6 +429,9 @@ class AddDataScreen extends StatelessWidget {
                     ),
             );
           }),
+          SizedBox(
+            height: 50,
+          )
         ],
       ),
     )));

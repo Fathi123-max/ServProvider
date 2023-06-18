@@ -32,7 +32,7 @@ class Info extends StatelessWidget {
               width: 300,
               decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: AssetImage('assets/images/logo.png'),
+                  image: AssetImage('assets/images/logo.gif'),
                   fit: BoxFit.fill,
                 ),
               ),
@@ -40,11 +40,13 @@ class Info extends StatelessWidget {
             SizedBox(height: 100.0),
             Padding(
               padding: const EdgeInsets.all(25.0),
-              child: Text(
-                ' اذا وجدت اي مشاكل او مضايقات لا تردد في التواصل معنا',
-                style: TextStyle(
-                  fontSize: 20.0,
-                  fontWeight: FontWeight.bold,
+              child: Center(
+                child: Text(
+                  ' اذا وجدت اي مشاكل او مضايقات او اقتراحات لا تردد في التواصل معنا',
+                  style: TextStyle(
+                    fontSize: 20.0,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
             ),
