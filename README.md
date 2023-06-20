@@ -13,8 +13,7 @@ Thanks for @Mudassar for this repository link : https://github.com/Mudassar41/Re
 لينك التحميل المباشر للتطبيق
 
 https://shorturl.at/jpH03
-
-<a href="https://ibb.co/y4ZBkzN"><img src="https://i.ibb.co/9Z134xp/Screenshot-20230619-185435-com-fathi-wehba.jpg" alt="Screenshot-20230619-185435-com-fathi-wehba" border="0"></a>
+<a href="https://ibb.co/y4ZBkzN"><img src="https://i.ibb.co/y4ZBkzN/Screenshot-20230619-185435-com-fathi-wehba.jpg" alt="Screenshot-20230619-185435-com-fathi-wehba" border="0" /></a>
 
 ![alt text](https://drive.google.com/file/d/1uwBCzVxGf9AGUhB_TN9AiD9RK7KOqExQ/view?usp=drivesdk)
 
