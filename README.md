@@ -13,18 +13,5 @@ Thanks for @Mudassar for this repository link : https://github.com/Mudassar41/Re
 لينك التحميل المباشر للتطبيق
 
 https://shorturl.at/jpH03
-<a href="https://ibb.co/y4ZBkzN"><img src="https://i.ibb.co/y4ZBkzN/Screenshot-20230619-185435-com-fathi-wehba.jpg" alt="Screenshot-20230619-185435-com-fathi-wehba" border="0" /></a>
 
-![alt text](https://github.com/Fathi123-max/ServProvider/blob/main/Screenshot_20230619_185117_com.fathi.wehba.jpg)
-
-
-![alt text](https://drive.google.com/file/d/1uw9AQZ-2oIm6caspPNF-DZKogo_euQuV/view?usp=drivesdk)
-
-
-![alt text](https://drive.google.com/file/d/1uvs8qj2cHbF-hnI5Ev9ZgK_HljCq-3Gn/view?usp=drivesdk)
-
-![alt text](https://drive.google.com/file/d/1uYYzmlZKtrlP2fkyok4e0nmbwAX3828s/view?usp=drivesdkhttps://drive.google.com/file/d/1uYYzmlZKtrlP2fkyok4e0nmbwAX3828s/view?usp=drivesdk)
-
-![alt text](https://drive.google.com/file/d/1uYYzmlZKtrlP2fkyok4e0nmbwAX3828s/view?usp=drivesdk)
-
-![alt text](https://drive.google.com/file/d/1uoikiZQwUCXFozSzvU5iE6dQkGzzb0nL/view?usp=drivesdk)
+<img src="https://github.com/Fathi123-max/ServProvider/blob/main/Screenshot_20230619_185117_com.fathi.wehba.jpg" alt="App Screenshot" width="500" height="300">
